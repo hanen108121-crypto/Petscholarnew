@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-TW"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>寵物商城 - PetScholar</title>
+<!-- Google Fonts & Icons -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline-variant": "#c3c7cc",
+                        "on-tertiary-fixed-variant": "#5c4127",
+                        "on-secondary-fixed-variant": "#40484f",
+                        "inverse-on-surface": "#f2f0f1",
+                        "tertiary-container": "#e1bb98",
+                        "primary-container": "#aec5d9",
+                        "on-tertiary-fixed": "#2b1702",
+                        "surface-bright": "#faf9fa",
+                        "on-secondary-container": "#5d656d",
+                        "on-surface": "#1b1c1d",
+                        "tertiary-fixed-dim": "#e6bf9c",
+                        "on-tertiary": "#ffffff",
+                        "secondary-container": "#dbe3ec",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-container": "#654a2e",
+                        "outline": "#73777c",
+                        "surface-container-low": "#f5f3f4",
+                        "on-surface-variant": "#43474c",
+                        "on-background": "#1b1c1d",
+                        "secondary": "#575f67",
+                        "primary-fixed-dim": "#b2c9dd",
+                        "on-primary-fixed-variant": "#33495a",
+                        "inverse-primary": "#b2c9dd",
+                        "surface-container-high": "#e9e8e9",
+                        "surface-dim": "#dbdada",
+                        "on-primary-fixed": "#051e2c",
+                        "tertiary": "#76593c",
+                        "surface-container": "#efedee",
+                        "on-primary-container": "#3c5263",
+                        "surface-tint": "#4b6172",
+                        "background": "#faf9fa",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed-dim": "#bfc7d0",
+                        "on-secondary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed": "#ffdcbe",
+                        "error": "#ba1a1a",
+                        "surface": "#faf9fa",
+                        "inverse-surface": "#303031",
+                        "surface-container-highest": "#e3e2e3",
+                        "primary-fixed": "#cee5fa",
+                        "primary": "#4b6172",
+                        "on-error": "#ffffff",
+                        "secondary-fixed": "#dbe3ec",
+                        "on-error-container": "#93000a",
+                        "surface-variant": "#e3e2e3",
+                        "on-secondary-fixed": "#151c23"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "md": "16px",
+                        "xl": "32px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "32px",
+                        "xs": "4px",
+                        "lg": "24px",
+                        "sm": "8px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1;
+        }
+        
+        /* Custom scrollbar for horizontal lists */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+
+<style id="petscholar-nav-fix">
+  .top-nav-fixed { gap: 3em !important; }
+  .top-nav-fixed a { white-space: nowrap; border-bottom: 2px solid transparent; padding-bottom: 0.25rem; }
+  .top-nav-fixed a.font-bold { border-bottom-color: currentColor; }
+  .petscholar-brand-link { text-decoration: none; cursor: pointer; }
+</style>
+
+<style id="ps-scrollable-side-tabs">
+/* 右側分頁列可滾動，避免分頁或寵物卡超出畫面 */
+aside.fixed {
+  overflow-y: auto !important;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+}
+aside.fixed > nav {
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 2px;
+}
+aside.fixed .mt-auto {
+  flex-shrink: 0;
+}
+aside.fixed::-webkit-scrollbar,
+aside.fixed > nav::-webkit-scrollbar {
+  width: 6px;
+}
+aside.fixed::-webkit-scrollbar-thumb,
+aside.fixed > nav::-webkit-scrollbar-thumb {
+  background: rgba(115, 119, 124, .35);
+  border-radius: 999px;
+}
+</style>
+
+</head>
+<body class="bg-background text-on-background font-body-md text-body-md min-h-screen">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 flex items-center justify-between px-margin-desktop h-16 bg-surface shadow-sm">
+<div class="flex items-center gap-sm">
+<a href="../../index.html" class="font-headline-md text-headline-md font-bold text-primary petscholar-brand-link">PetScholar</a>
+<div class="hidden lg:flex items-center gap-md ml-lg">
+<!-- Inactive -->
+<a class="text-secondary hover:text-primary transition-colors flex flex-col items-center justify-center h-16 px-sm" href="../_2/code.html">
+<span class="font-body-md text-body-md">看板</span>
+</a>
+<!-- Inactive -->
+<a class="text-secondary hover:text-primary transition-colors flex flex-col items-center justify-center h-16 px-sm" href="../_3/code.html">
+<span class="font-body-md text-body-md">自習室</span>
+</a>
+<!-- Inactive -->
+<a class="text-secondary hover:text-primary transition-colors flex flex-col items-center justify-center h-16 px-sm" href="../_5/code.html">
+<span class="font-body-md text-body-md">討論版</span>
+</a>
+<!-- Inactive -->
+<a class="text-secondary hover:text-primary transition-colors flex flex-col items-center justify-center h-16 px-sm" href="../_6/code.html">
+<span class="font-body-md text-body-md">寵物餵食</span>
+</a>
+<!-- Active -->
+<a class="text-primary font-bold border-b-2 border-primary pb-1 hover:text-primary transition-colors flex flex-col items-center justify-center h-16 px-sm pt-1" href="../_7/code.html">
+<span class="font-body-md text-body-md">寵物商城</span>
+</a>
+<!-- Inactive -->
+<a class="text-secondary hover:text-primary transition-colors flex flex-col items-center justify-center h-16 px-sm" href="../_8/code.html">
+<span class="font-body-md text-body-md">排行榜</span>
+</a>
+<!-- Inactive -->
+<a class="text-secondary hover:text-primary transition-colors flex flex-col items-center justify-center h-16 px-sm" href="../_9/code.html">
+<span class="font-body-md text-body-md">個人檔案</span>
+</a>
+</div>
+</div>
+<div class="flex items-center gap-md">
+
+<a href="../_1/code.html" title="前往登入 / 註冊頁" style="text-decoration:none;" class="bg-primary text-on-primary px-lg py-sm rounded-lg font-label-md text-label-md hover:bg-surface-tint transition-colors flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">login</span>
+    會員登入
+</a>
+</div>
+</nav>
+<!-- SideNavBar (Desktop Right) -->
+<aside class="hidden md:flex fixed right-0 top-16 h-[calc(100vh-64px)] w-64 flex-col p-md border-l border-outline-variant bg-surface-container shadow-md z-40 transition-all duration-200 ease-in-out">
+<!-- Header: Pet Status -->
+<div class="flex flex-col items-center p-md mb-md bg-surface rounded-xl shadow-sm border border-outline-variant/30">
+<div class="w-20 h-20 rounded-full bg-secondary-container mb-sm overflow-hidden flex items-center justify-center border-2 border-primary-container">
+<img alt="Buddy Pet" class="w-16 h-16 object-contain" data-alt="A stylized 3D rendering of a friendly robotic pet character with subtle blue and slate tones, sitting against a clean off-white background, matching a modern corporate UI style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmbBtpVpwhUyJPIf82sV-Fer7hKn-IqY0dh9QVPbSoi1ILf5WQcBV52e7e_lbo7uNgNSgcg6oRZoGEU3dqWJQPUgrpQKWnv6c2L4lRVxX-HbGioyW8NOQbEE9GzjG4YgF5htYyZeQVxOxrcADGZzeUI4953hn3bA3sP-W0GEZlt3zG6jS6lOuuuj42NVfpqS6TcVaPgKz6y0K8mNh01UrtZbuf_5c3UJ9zebyXc3ZSdoZLb5GFHXBz3hgHoiSthe0eMIAsh-RYPZrX"/>
+</div>
+<h2 class="font-headline-md text-headline-md text-primary mb-xs">寵物狀態</h2>
+<div class="flex items-center justify-center gap-1 mb-1">
+<span class="material-symbols-outlined text-error">favorite</span>
+<span class="material-symbols-outlined text-error">favorite</span>
+<span class="material-symbols-outlined text-error">favorite</span>
+<span class="material-symbols-outlined text-error">favorite</span>
+<span class="material-symbols-outlined text-error">favorite</span>
+</div>
+<span class="text-on-surface-variant font-body-md">金幣: 120</span>
+<button class="mt-md w-full bg-primary text-on-primary py-sm rounded-lg font-label-md text-label-md hover:bg-surface-tint transition-colors flex items-center justify-center gap-xs shadow-sm">
+<span class="material-symbols-outlined text-[18px]">healing</span> 治療寵物
+</button>
+</div>
+<!-- Navigation Tabs -->
+<nav class="flex-1 flex flex-col gap-xs">
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-variant rounded-lg scale-95 active:scale-90 transition-transform" href="../_2/code.html">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">看板</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm bg-primary-container text-on-primary-container rounded-lg scale-95 active:scale-90 transition-transform" href="../_7/code.html">
+<span class="material-symbols-outlined icon-fill">storefront</span>
+<span class="font-label-md text-label-md font-bold">寵物商城</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-variant rounded-lg scale-95 active:scale-90 transition-transform" href="../_3/code.html">
+<span class="material-symbols-outlined">school</span>
+<span class="font-label-md text-label-md">自習室</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-variant rounded-lg scale-95 active:scale-90 transition-transform" href="../_5/code.html">
+<span class="material-symbols-outlined">forum</span>
+<span class="font-label-md text-label-md">討論版</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-variant rounded-lg scale-95 active:scale-90 transition-transform" href="../_8/code.html">
+<span class="material-symbols-outlined">leaderboard</span>
+<span class="font-label-md text-label-md">排行榜</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-variant rounded-lg scale-95 active:scale-90 transition-transform" href="../_9/code.html">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md">個人檔案</span>
+</a>
+</nav>
+<!-- Footer Tabs -->
+<div class="mt-auto pt-md border-t border-outline-variant/50 flex flex-col gap-xs">
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-variant rounded-lg scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-md text-label-md">幫助</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-error hover:bg-error-container rounded-lg scale-95 active:scale-90 transition-transform" href="../../index.html">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md text-label-md">登出</span>
+</a>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="pt-16 md:pr-64 min-h-screen">
+<div class="p-margin-mobile md:p-margin-desktop max-w-6xl mx-auto space-y-xl">
+<!-- Page Header -->
+<header class="flex items-center justify-between">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-xs">寵物商城</h1>
+<p class="font-body-md text-body-md text-secondary">為您的學習夥伴補充能量與裝備</p>
+</div>
+<div class="hidden sm:flex items-center gap-sm bg-surface-container px-md py-sm rounded-full shadow-sm">
+<span class="material-symbols-outlined text-tertiary">account_balance_wallet</span>
+<span class="font-label-md text-label-md text-on-surface">餘額: 120 枚金幣</span>
+</div>
+</header>
+<!-- Pet Food Bento Grid -->
+<section>
+<div class="flex items-center gap-sm mb-md">
+<span class="material-symbols-outlined text-primary">restaurant</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">補給品</h2>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-md">
+<!-- Item 1: Milk -->
+<div class="bg-surface-bright rounded-xl p-md border border-outline-variant shadow-sm hover:shadow-md transition-shadow flex flex-col">
+<div class="h-32 bg-surface-container-low rounded-lg mb-md flex items-center justify-center relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-secondary-container to-surface-container opacity-50"></div>
+<img alt="牛奶 (基礎)" class="h-28 w-28 object-contain relative z-10 group-hover:scale-110 transition-transform" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBSZm0-7ujJMJXQO8YyOJkVr9UyuO_AExHK7LCmF77lew_9aOrVGaZ77Z18euG15wWszGRYxoPROjnUN8_1MgHurw159OLGxqabMWVYxSvRCSri7MQJgiUndbAe-xGb18GABhyFk2kdHoqE_QHx9J46EuQKMDtMWONambSGVCVkG8lgcjYzo3pGtMTG5CU72Nhwc4dO00VEWx3FtN9ATPd2_3TlJd1SZmsLtTnoXbsosjue_kGZas15xR6dug3frKg3JSjnfm-nncd"/>
+</div>
+<h3 class="font-body-lg text-body-lg font-bold text-on-surface mb-xs">牛奶 (基礎)</h3>
+<p class="font-body-md text-body-md text-secondary mb-md flex-1">基礎飲品，微幅恢復體力。</p>
+<div class="flex items-center justify-between mt-auto">
+<span class="font-label-md text-label-md text-tertiary flex items-center gap-xs"><span class="material-symbols-outlined text-[16px] icon-fill">monetization_on</span> 10</span>
+<button class="px-md py-xs border border-secondary text-secondary rounded-lg font-label-md text-label-md hover:bg-surface-variant transition-colors">購買</button>
+</div>
+</div>
+<!-- Item 2: Honey Jar -->
+<div class="bg-surface-bright rounded-xl p-md border border-outline-variant shadow-sm hover:shadow-md transition-shadow flex flex-col">
+<div class="h-32 bg-surface-container-low rounded-lg mb-md flex items-center justify-center relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-secondary-container to-surface-container opacity-50"></div>
+<img alt="蜂蜜罐 (基礎)" class="h-28 w-28 object-contain relative z-10 group-hover:scale-110 transition-transform" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAYRM9dbWl8datrcYD0aoItj7fFziw91cWgJZntsglPVtLrjQ_RBarjGjvTWNNDWDIDXIyjBkdyVQ6IHw2WveNoxiOztCpaFTa9fK1_8-gyt-2fw-CEODFrRcmNe8jGvicNPYtfRjCPwDUCgOAK3Shtoak-WBM1GaVQtV3d7TJMICFuzVsT7AhsDllgnaGksTvaXYfuHHVHosZVvaxho9worNVF_BO8m1J2sfSB1GIjiG-r68NpfyXOQtPh_wt2zehUNl07fHq3X9-"/>
+</div>
+<h3 class="font-body-lg text-body-lg font-bold text-on-surface mb-xs">蜂蜜罐 (基礎)</h3>
+<p class="font-body-md text-body-md text-secondary mb-md flex-1">香甜蜂蜜，微幅增加飽食度。</p>
+<div class="flex items-center justify-between mt-auto">
+<span class="font-label-md text-label-md text-tertiary flex items-center gap-xs"><span class="material-symbols-outlined text-[16px] icon-fill">monetization_on</span> 15</span>
+<button class="px-md py-xs border border-secondary text-secondary rounded-lg font-label-md text-label-md hover:bg-surface-variant transition-colors">購買</button>
+</div>
+</div>
+<!-- Item 3: Apple -->
+<div class="bg-surface-bright rounded-xl p-md border border-outline-variant shadow-sm hover:shadow-md transition-shadow flex flex-col relative overflow-hidden">
+<div class="h-32 bg-primary-container/20 rounded-lg mb-md flex items-center justify-center relative overflow-hidden group">
+<img alt="蘋果 (普通)" class="h-28 w-28 object-contain relative z-10 group-hover:scale-110 transition-transform" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0STl3aP4dNiMiKUTNotuqNvJtL9g4JnecHrz9L7CHBtnvLVOd4fUfgwiCMTDDSqDFWqm4BrvMI_YzgShv85r2ZUgRG1aacK3TTBH7od1IhhRtRpWbh-Hm13jT8wa0bJ-3o6LEAcSU3IPKsGXDEgI_l-gmFYcMbD0zvKduXEdCcrzk4spqBct5rirrqv5TNY9cOYHe-K6hHPqsiao8NxnC-7fSOd-IcvITS27QCMyQXZF6i1tUyLwK_L9DjuMh5tm53KS__vM_n00i"/>
+</div>
+<h3 class="font-body-lg text-body-lg font-bold text-on-surface mb-xs">蘋果 (普通)</h3>
+<p class="font-body-md text-body-md text-secondary mb-md flex-1">健康水果，恢復中等飽食度。</p>
+<div class="flex items-center justify-between mt-auto">
+<span class="font-label-md text-label-md text-tertiary flex items-center gap-xs"><span class="material-symbols-outlined text-[16px] icon-fill">monetization_on</span> 25</span>
+<button class="px-md py-xs bg-primary/10 text-primary border border-primary/20 rounded-lg font-label-md text-label-md hover:bg-primary/20 transition-colors">購買</button>
+</div>
+</div>
+<!-- Item 4: Grapes -->
+<div class="bg-surface-bright rounded-xl p-md border border-outline-variant shadow-sm hover:shadow-md transition-shadow flex flex-col relative overflow-hidden">
+<div class="h-32 bg-primary-container/20 rounded-lg mb-md flex items-center justify-center relative overflow-hidden group">
+<img alt="葡萄 (普通)" class="h-28 w-28 object-contain relative z-10 group-hover:scale-110 transition-transform" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZlRqXHjGqXvdF6risfFY9x6FFRQ4DMf_f13QQ4_7t4vgBJPK43REf8u6rUknDY0IKI9og1kgJ1QrTRurkruPozjQVos-HHF56HWFbAY0DgZXtcTSiGFwEmd_mTbt17cNTXTn0zpTRV8y8Jgxs39deWEFuNWZAm5r1lg68pwHYUbWxl1xo1aYsErD2oWk2cRvlUjTtr_5WA_ZSH2VTYFY-O9isk3D5a0bv--fvS5QWQirCUca_02WV5ZPHZT38vL35cgqUPy4EOXWk"/>
+</div>
+<h3 class="font-body-lg text-body-lg font-bold text-on-surface mb-xs">葡萄 (普通)</h3>
+<p class="font-body-md text-body-md text-secondary mb-md flex-1">新鮮葡萄，恢復中等體力。</p>
+<div class="flex items-center justify-between mt-auto">
+<span class="font-label-md text-label-md text-tertiary flex items-center gap-xs"><span class="material-symbols-outlined text-[16px] icon-fill">monetization_on</span> 30</span>
+<button class="px-md py-xs bg-primary/10 text-primary border border-primary/20 rounded-lg font-label-md text-label-md hover:bg-primary/20 transition-colors">購買</button>
+</div>
+</div>
+<!-- Item 5: Tuna Sandwich -->
+<div class="bg-surface-bright rounded-xl p-md border-2 border-primary-container shadow-sm hover:shadow-md transition-shadow flex flex-col relative overflow-hidden">
+<div class="absolute top-0 right-0 bg-primary text-on-primary px-sm py-xs rounded-bl-lg font-label-md text-label-md">熱銷</div>
+<div class="h-32 bg-primary-container/40 rounded-lg mb-md flex items-center justify-center relative overflow-hidden group">
+<img alt="鮪魚三明治 (稀有)" class="h-28 w-28 object-contain relative z-10 group-hover:scale-110 transition-transform" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxZqKdh393mrmu3xRHnlDQIK6Bou4neKs24252VpTbuTn9TL9bYwNYLQJaMz3vCNC750D7dVSTy2ge5VbY0jCmMFsLPIbMGu1pc-ngBoMCS-gN8GxAoIN7dDTYYJQSk5BYLMIHY-SEIqQ1R2tIgmPqCdZGu9rOxvsbbq_5tnVL5r5RGVeg7jl2nvtvzElH39i7n8wHiIrclTB-9jXpikcKesYWpn3K_8W1EeWHQEp4hp6-yqrRD_8mc1auC2aOmpsvVokERqtglDIy"/>
+</div>
+<h3 class="font-body-lg text-body-lg font-bold text-on-surface mb-xs">鮪魚三明治 (稀有)</h3>
+<p class="font-body-md text-body-md text-secondary mb-md flex-1">營養均衡，大幅恢復體力與飽食度。</p>
+<div class="flex items-center justify-between mt-auto">
+<span class="font-label-md text-label-md text-tertiary flex items-center gap-xs"><span class="material-symbols-outlined text-[16px] icon-fill">monetization_on</span> 50</span>
+<button class="px-md py-xs bg-primary text-on-primary rounded-lg font-label-md text-label-md hover:bg-surface-tint transition-colors">購買</button>
+</div>
+</div>
+<!-- Item 6: Ramen Bowl -->
+<div class="bg-surface-bright rounded-xl p-md border-2 border-primary-container shadow-sm hover:shadow-md transition-shadow flex flex-col relative overflow-hidden">
+<div class="h-32 bg-primary-container/40 rounded-lg mb-md flex items-center justify-center relative overflow-hidden group">
+<img alt="拉麵 (稀有)" class="h-28 w-28 object-contain relative z-10 group-hover:scale-110 transition-transform" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpJqmC_0gs_kIfA95wCtB3mR3r-8dR9HTa8t20ZhRLTxUI9OG1eKBiXoiI-Rx7CfW0sud-7LpiRnmpFsrDQ51_2SqAjTHQWWcYQOpZEsoD-ZJZIjya0aEcXDExoAxadgMnywvw4AFs2yWu_p3ZhLudXfbJhv7PpRhcShvEuuxWeFxWkzlOXWyFKrxZwrFh_378SrMm00jErQy3sfaqRpyZgo8BWApfHxhp82z34XDRM-i06C4CuaR000nL14O6NiH062lCtuPrd6g6"/>
+</div>
+<h3 class="font-body-lg text-body-lg font-bold text-on-surface mb-xs">拉麵 (稀有)</h3>
+<p class="font-body-md text-body-md text-secondary mb-md flex-1">熱騰騰的拉麵，大幅恢復體力。</p>
+<div class="flex items-center justify-between mt-auto">
+<span class="font-label-md text-label-md text-tertiary flex items-center gap-xs"><span class="material-symbols-outlined text-[16px] icon-fill">monetization_on</span> 65</span>
+<button class="px-md py-xs bg-primary text-on-primary rounded-lg font-label-md text-label-md hover:bg-surface-tint transition-colors">購買</button>
+</div>
+</div>
+<!-- Item 7: Gourmet Steak -->
+<div class="bg-surface-bright rounded-xl p-md border border-tertiary-container shadow-sm hover:shadow-md transition-shadow flex flex-col bg-gradient-to-b from-surface-bright to-tertiary-fixed/10">
+<div class="h-32 bg-tertiary-container/30 rounded-lg mb-md flex items-center justify-center relative overflow-hidden group">
+<img alt="頂級牛排 (史詩)" class="h-28 w-28 object-contain relative z-10 group-hover:scale-110 transition-transform" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbd4I9bmiLHOnYtLGOXCgR3kdDXRE1D6SudyHO7MFxGcGuJbGJxERhKvXMPX7Vo0TGD3jI-n9yB_w23BvXQ30w8m4a59WjBlJ0DrvNfSk-LQxjRZQ5qpCicxXSXljcErUqUfC7Vm0tt1Ajp12im40LoRjsq4gTRhnHK1GrogDc-a5LSqygpICaEsvEvHj6HryUKU8InFbxNNjws9NxTo9Qyuc8VxRHLeCZtk3mi0fdqCqIY63xTH21grKahZups29DCihFHatK4gu_"/>
+</div>
+<h3 class="font-body-lg text-body-lg font-bold text-on-tertiary-container mb-xs">頂級牛排 (史詩)</h3>
+<p class="font-body-md text-body-md text-secondary mb-md flex-1">頂級食材，全方位提升狀態與經驗。</p>
+<div class="flex items-center justify-between mt-auto">
+<span class="font-label-md text-label-md text-tertiary flex items-center gap-xs"><span class="material-symbols-outlined text-[16px] icon-fill">monetization_on</span> 100</span>
+<button class="px-md py-xs bg-tertiary text-on-tertiary rounded-lg font-label-md text-label-md hover:opacity-90 transition-opacity shadow-sm">購買</button>
+</div>
+</div>
+<!-- Item 8: Strawberry Cake -->
+<div class="bg-surface-bright rounded-xl p-md border border-tertiary-container shadow-sm hover:shadow-md transition-shadow flex flex-col bg-gradient-to-b from-surface-bright to-tertiary-fixed/10">
+<div class="h-32 bg-tertiary-container/30 rounded-lg mb-md flex items-center justify-center relative overflow-hidden group">
+<img alt="草莓蛋糕 (史詩)" class="h-28 w-28 object-contain relative z-10 group-hover:scale-110 transition-transform" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-5Y3-i1lX5qFNwzJkoCuS8jHNUViv1A6XrGXr2UOyCfJvGpaKAIxIAbm1O1iOtZfan4Agbfesds_OPhy-qYMqAWdys2LBlIR3oT9j_GVmBeKVGr0kiAjxqRmdK0gmSxK3LPUVGU9sqoTka3C0nzvDeDS_Fz9eCV8orxH83V-avq5T2ChZ1LGA5qMOWH3FrkH6mKuMNqIKLxeB5zqiLzDleenYIX2UIbLzjhZCmQZYUupsg9yLcgcN22hnoSbq-wAZ0Df_GB7oGfDx"/>
+</div>
+<h3 class="font-body-lg text-body-lg font-bold text-on-tertiary-container mb-xs">草莓蛋糕 (史詩)</h3>
+<p class="font-body-md text-body-md text-secondary mb-md flex-1">精緻甜點，大幅提升心情與狀態。</p>
+<div class="flex items-center justify-between mt-auto">
+<span class="font-label-md text-label-md text-tertiary flex items-center gap-xs"><span class="material-symbols-outlined text-[16px] icon-fill">monetization_on</span> 120</span>
+<button class="px-md py-xs bg-tertiary text-on-tertiary rounded-lg font-label-md text-label-md hover:opacity-90 transition-opacity shadow-sm">購買</button>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+
+
+
+
+
+
+
+
+
+
+<script id="shop-simulator">
+document.addEventListener("DOMContentLoaded", () => {
+    const itemMap = {
+        "牛奶 (基礎)": "牛奶",
+        "蜂蜜罐 (基礎)": "蜂蜜",
+        "蘋果 (普通)": "蘋果",
+        "葡萄 (普通)": "葡萄",
+        "鮪魚三明治 (稀有)": "鮪魚三明治",
+        "拉麵 (稀有)": "拉麵",
+        "頂級牛排 (史詩)": "頂級牛排",
+        "草莓蛋糕 (史詩)": "草莓蛋糕"
+    };
+
+    const cards = document.querySelectorAll(".bg-surface-bright.flex-col, .bg-surface-bright.flex.flex-col");
+    cards.forEach(card => {
+        const titleEl = card.querySelector("h3");
+        const priceEl = card.querySelector(".text-tertiary");
+        const btn = card.querySelector("button");
+        if (titleEl && priceEl && btn && btn.textContent.trim() === "購買") {
+            const title = titleEl.textContent.trim();
+            const price = parseInt(priceEl.textContent.replace(/[^0-9]/g, ""), 10) || 0;
+            btn.addEventListener("click", () => {
+                const savedPet = localStorage.getItem("studypet_pet");
+                if (savedPet) {
+                    const pet = JSON.parse(savedPet);
+                    if (pet.coins >= price) {
+                        pet.coins -= price;
+                        if (!pet.inventory) pet.inventory = [];
+                        
+                        const backPackName = itemMap[title] || title;
+                        pet.inventory.push(backPackName);
+                        
+                        localStorage.setItem("studypet_pet", JSON.stringify(pet));
+                        if (window.syncPetScholarCoins) window.syncPetScholarCoins();
+                        alert(`成功購買 ${title}！扣除 ${price} 金幣。已放入您的食物背包！目前餘額 ${pet.coins} 金幣。`);
+                        window.location.reload();
+                    } else {
+                        alert(`金幣不足！還需要 ${price - pet.coins} 金幣。`);
+                    }
+                } else {
+                    alert("請先完成登入或註冊！");
+                }
+            });
+        }
+    });
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script id="sync-localstate">
+document.addEventListener("DOMContentLoaded", () => {
+    try {
+        const savedUser = localStorage.getItem("studypet_user");
+        const savedPet = localStorage.getItem("studypet_pet");
+        if (savedUser && savedPet) {
+            const user = JSON.parse(savedUser);
+            const pet = JSON.parse(savedPet);
+            
+            // Enforce pet hp range and defaults for 5 hearts (each heart is 100 HP)
+            if (pet.hp === 100 || !pet.hp) {
+                pet.hp = 500;
+                pet.baseHp = 500;
+                pet.lastActivityTime = Date.now();
+            }
+            if (!pet.baseHp) pet.baseHp = pet.hp;
+            if (!pet.lastActivityTime) pet.lastActivityTime = Date.now();
+
+            // Calculate hourly drop (10 HP per hour of inactivity since last activity)
+            const elapsed = Date.now() - pet.lastActivityTime;
+            const hoursElapsed = Math.floor(elapsed / (3600 * 1000));
+            const hpLoss = hoursElapsed * 10;
+            const newHp = Math.max(0, pet.baseHp - hpLoss);
+            
+            if (pet.hp !== newHp) {
+                pet.hp = newHp;
+                pet.hearts = Math.ceil(newHp / 100);
+                localStorage.setItem("studypet_pet", JSON.stringify(pet));
+            }
+
+            // Sync user avatar based on gender setting
+            const maleAvatar = "https://lh3.googleusercontent.com/aida-public/AB6AXuBHaUoUmD0NCQT0xkjGAhDfZcg0aBzllN0eFaNJtLBJf8cc_LGkd5eJLBbe92XyjZcFmqtTtPMy4nmqui7orI5FCwxtzZipXn7IT-ADqLhM-YTMnLuhwW5IkvAQb9VJ8EQNXDa-NeT0hvQnvHccj3YXgjW3PbfLOycAjzkdgDJWR7eHCVwig2L_UZfEHNjKWxKHhiTtGZPC5nhE25w7fJW4k4D14gGtDhExwWSmAB903j0EwwVPcfvR4EdG5X-hEsi442t72MF0CECQ";
+            const femaleAvatar = "https://lh3.googleusercontent.com/aida-public/AB6AXuD6nYakPwha1xLE6ySgmmA3ALzCOIWvd5yKYtNc6I559vHmzcy6tuMKiyMt_XVU9C_i2EE6LXL3kR7esJW5Vpg8sdOkC99wKCsBwwj-CV7gOl85EXPmZozLCJMLTjfCgo1E6AQrurCE2oitnwoxspLZLgSj20zFdeIiRstXmq7pUoQT_fSqQiKZGslhXyPRUYFNP29JUCFo5YTkvdhoZJRshYhOdgiFeOqTl5IYb-_t46ECQsIlHcmedAhJ2jr9xN-EwM-PC-MeQ0SO";
+            const avatarUrl = user.avatarDataUrl || (user.gender === "male" ? maleAvatar : femaleAvatar);
+            
+            const navAvatar = document.querySelector('img[alt="User avatar"]');
+            if (navAvatar) {
+                navAvatar.src = avatarUrl;
+            }
+            
+            const profileAvatar = document.querySelector('img[alt="Profile Picture"]');
+            if (profileAvatar && window.location.pathname.includes("_9")) {
+                profileAvatar.src = avatarUrl;
+            }
+            
+            // 1. Sync user details on Profile Page
+            const profileName = document.querySelector(".font-headline-lg.text-headline-lg.text-on-surface");
+            if (profileName && window.location.pathname.includes("_9")) {
+                profileName.textContent = user.username;
+                const profileDept = profileName.nextElementSibling;
+                if (profileDept && profileDept.classList.contains("font-body-lg")) {
+                    profileDept.textContent = user.department;
+                }
+                const profileBio = document.querySelector(".font-body-md.text-body-md.text-on-surface-variant.max-w-md");
+                if (profileBio && user.bio) {
+                    profileBio.textContent = user.bio;
+                }
+                const statsCards = document.querySelectorAll(".bg-surface.rounded-lg.p-md");
+                statsCards.forEach(card => {
+                    const label = card.querySelector(".text-secondary");
+                    if (label) {
+                        if (label.textContent.includes("目前等級") || label.textContent.includes("Level")) {
+                            const val = card.querySelector(".text-on-surface");
+                            if (val) val.textContent = `Lv. ${user.level || 1}`;
+                        }
+                        if (label.textContent.includes("總金幣") || label.textContent.includes("Coins")) {
+                            const val = card.querySelector(".text-on-surface");
+                            if (val) val.textContent = pet.coins;
+                        }
+                    }
+                });
+            }
+
+            // 2. Sync Sidebar Pet status
+            const aside = document.querySelector("aside");
+            if (aside) {
+                // Sync Pet Name
+                const petHeader = aside.querySelector("h2, h3");
+                if (petHeader) {
+                    petHeader.textContent = pet.name || "未命名小精靈";
+                }
+
+                // Sync Pet Mascot Type Avatar
+                const mascotEmojis = {
+                    robot: "🤖",
+                    rat: "🐭", ox: "🐮", tiger: "🐯", rabbit: "🐰",
+                    dragon: "🐲", snake: "🐍", horse: "🐴", goat: "🐐",
+                    monkey: "🐵", rooster: "🐔", dog: "🐶", pig: "🐷",
+                    cat: "🐱", panda: "🐼"
+                };
+                const asideImg = aside.querySelector("img");
+                if (asideImg) {
+                    const emojiSpan = document.createElement("span");
+                    emojiSpan.style.fontSize = "48px";
+                    emojiSpan.style.lineHeight = "1";
+                    emojiSpan.style.marginBottom = "8px";
+                    emojiSpan.textContent = mascotEmojis[pet.mascotType] || "🤖";
+                    asideImg.parentNode.replaceChild(emojiSpan, asideImg);
+                } else {
+                    const petsSpan = aside.querySelector('.material-symbols-outlined');
+                    if (petsSpan && petsSpan.textContent.trim() === 'pets') {
+                        petsSpan.parentNode.innerHTML = `<span style="font-size: 48px; line-height: 1; margin-bottom: 8px;">${mascotEmojis[pet.mascotType] || "🤖"}</span>`;
+                    }
+                }
+
+                // Sync Pet Level in the Level Badge (like Lv.5 badge)
+                const lvlBadge = aside.querySelector(".bg-error.text-on-error, .absolute.-bottom-2.-right-2");
+                if (lvlBadge) {
+                    lvlBadge.textContent = `Lv.${pet.level || 1}`;
+                }
+                
+                // Sync Pet HP numeric text below hearts in sidebar
+                let hpLabel = aside.querySelector("#sidebar-pet-hp");
+                if (!hpLabel) {
+                    hpLabel = document.createElement("div");
+                    hpLabel.id = "sidebar-pet-hp";
+                    hpLabel.className = "text-on-surface-variant text-[11px] font-medium mb-1 text-center";
+                    const heartDiv = aside.querySelector(".flex.items-center.justify-center.gap-xs, .flex.items-center.justify-center.gap-1");
+                    if (heartDiv) {
+                        heartDiv.parentNode.insertBefore(hpLabel, heartDiv.nextSibling);
+                    }
+                }
+                if (hpLabel) {
+                    hpLabel.textContent = `生命值：${pet.hp} / 500`;
+                }
+                // Sync healing button action
+                const healBtn = aside.querySelector("button");
+                if (healBtn && (healBtn.textContent.includes("治療") || healBtn.textContent.includes("Heal"))) {
+                    healBtn.onclick = () => {
+                        if (pet.hp >= 500) {
+                            alert("您的寵物非常健康，目前不需要治療！");
+                            return;
+                        }
+                        if (pet.coins >= 20) {
+                            pet.coins -= 20;
+                            pet.hp = 500;
+                            pet.baseHp = 500;
+                            pet.hearts = 5;
+                            pet.lastActivityTime = Date.now();
+                            localStorage.setItem("studypet_pet", JSON.stringify(pet));
+                            alert("治療成功！扣除 20 金幣，HP 已完全恢復！");
+                            window.location.reload();
+                        } else {
+                            alert("金幣不足！治療需要 20 金幣。");
+                        }
+                    };
+
+                    // Dynamic "Simulate 1 Hour" button in sidebar
+                    if (!aside.querySelector("#btn-simulate-time")) {
+                        const simBtn = document.createElement("button");
+                        simBtn.id = "btn-simulate-time";
+                        simBtn.className = "w-full py-2 mt-2 bg-secondary/15 hover:bg-secondary/25 text-secondary dark:text-secondary-fixed-dim font-label-md text-label-md rounded-lg border border-outline-variant/30 transition-all";
+                        simBtn.textContent = "模擬時間流逝 1 小時 ⏳";
+                        simBtn.onclick = () => {
+                            pet.lastActivityTime = (pet.lastActivityTime || Date.now()) - (3600 * 1000);
+                            localStorage.setItem("studypet_pet", JSON.stringify(pet));
+                            alert("已模擬流逝 1 小時！");
+                            window.location.reload();
+                        };
+                        healBtn.parentNode.insertBefore(simBtn, healBtn.nextSibling);
+                    }
+                }
+            }
+
+            // 2b. Inject Visualizer and Professor tabs dynamically
+            const asideNav = document.querySelector("aside nav.flex-1");
+            if (asideNav) {
+                if (!asideNav.querySelector('a[href*="_14"]')) {
+                    const isProfPage = window.location.pathname.includes("_14");
+                    const profLink = document.createElement("a");
+                    profLink.href = "../_14/code.html";
+                    profLink.className = isProfPage
+                        ? "bg-primary-container text-on-primary-container rounded-lg flex items-center gap-md px-md py-sm transition-transform scale-95 active:scale-90"
+                        : "text-on-surface-variant hover:bg-surface-variant rounded-lg flex items-center gap-md px-md py-sm hover:bg-surface-container-highest dark:hover:bg-surface-variant transition-transform scale-95 active:scale-90";
+                    profLink.innerHTML = `<span class="material-symbols-outlined">school</span><span>課程教授主頁</span>`;
+                    asideNav.appendChild(profLink);
+                }
+            }
+
+            const topNavList = document.querySelector("nav ul.hidden.lg\:flex");
+            if (topNavList) {
+                if (!topNavList.querySelector('a[href*="_14"]')) {
+                    const isProfPage = window.location.pathname.includes("_14");
+                    const profLi = document.createElement("li");
+                    profLi.className = "h-full flex items-center";
+                    profLi.innerHTML = `<a class="${isProfPage ? 'text-primary dark:text-primary-fixed font-bold border-b-2 border-primary dark:border-primary-fixed' : 'text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-colors'} h-full flex items-center px-2" href="../_14/code.html">教授主頁</a>`;
+                    topNavList.appendChild(profLi);
+                }
+            }
+
+            // 3. Global Heart (HP) and Coins Synchronization
+            const allSpans = document.querySelectorAll(".material-symbols-outlined");
+            const heartContainers = new Set();
+            allSpans.forEach(span => {
+                if (span.textContent.trim() === "favorite") {
+                    const parent = span.parentElement;
+                    if (parent) {
+                        heartContainers.add(parent);
+                    }
+                }
+            });
+            
+            const heartCount = Math.ceil(pet.hp / 100);
+            
+            heartContainers.forEach(container => {
+                const spans = Array.from(container.children).filter(el => el.textContent.trim() === "favorite");
+                if (spans.length > 1) {
+                    while (spans.length < 5) {
+                        const newSpan = document.createElement("span");
+                        newSpan.className = spans[0] ? spans[0].className : "material-symbols-outlined text-error text-sm";
+                        newSpan.textContent = "favorite";
+                        container.appendChild(newSpan);
+                        spans.push(newSpan);
+                    }
+                    while (spans.length > 5) {
+                        const lastSpan = spans.pop();
+                        container.removeChild(lastSpan);
+                    }
+                    spans.forEach((span, i) => {
+                        const fill = i < heartCount ? 1 : 0;
+                        span.style.fontVariationSettings = `'FILL' ${fill}, 'wght' 400, 'GRAD' 0, 'opsz' 24`;
+                        if (span.style.cssText.includes("FILL")) {
+                            span.style.cssText = span.style.cssText.replace(/FILL'\s*\d/, `FILL' ${fill}`);
+                        }
+                        if (fill) {
+                            span.classList.add("icon-fill");
+                        } else {
+                            span.classList.remove("icon-fill");
+                        }
+                    });
+
+                    // Dynamic HP text next to multi-heart container (excluding sidebar)
+                    if (!container.closest("aside")) {
+                        const parent = container.parentElement;
+                        if (parent) {
+                            let hpSpan = parent.querySelector(".hp-text-badge");
+                            if (!hpSpan) {
+                                hpSpan = document.createElement("span");
+                                hpSpan.className = "hp-text-badge text-[11px] font-semibold text-secondary ml-xs shrink-0";
+                                parent.appendChild(hpSpan);
+                            }
+                            hpSpan.textContent = `(${pet.hp}/500)`;
+                        }
+                    }
+                } else if (spans.length === 1) {
+                    const span = spans[0];
+                    const fill = heartCount > 0 ? 1 : 0;
+                    span.style.fontVariationSettings = `'FILL' ${fill}, 'wght' 400, 'GRAD' 0, 'opsz' 24`;
+                    if (span.style.cssText.includes("FILL")) {
+                        span.style.cssText = span.style.cssText.replace(/FILL'\s*\d/, `FILL' ${fill}`);
+                    }
+                    if (fill) {
+                        span.classList.add("icon-fill");
+                    } else {
+                        span.classList.remove("icon-fill");
+                    }
+                    
+                    if (span.nextSibling && span.nextSibling.nodeType === Node.TEXT_NODE) {
+                        span.nextSibling.nodeValue = ` ${heartCount} (生命值: ${pet.hp}/500) `;
+                    }
+                    const parent = span.parentElement;
+                    if (parent) {
+                        parent.childNodes.forEach(node => {
+                            if (node.nodeType === Node.TEXT_NODE) {
+                                node.nodeValue = ` ${heartCount} (生命值: ${pet.hp}/500) `;
+                            }
+                        });
+                    }
+                }
+            });
+
+            // Sync Coins text next to monetization_on globally
+            allSpans.forEach(ico => {
+                if (ico.textContent.trim() === "monetization_on") {
+                    if (ico.closest(".bg-surface-bright") || ico.closest("[id^='shop-item-']") || ico.closest("#full-shop-container") || ico.closest("#quick-shop-container") || ico.closest("[id^='quick-item-']")) {
+                        return;
+                    }
+                    if (ico.nextSibling && ico.nextSibling.nodeType === Node.TEXT_NODE) {
+                        const trimmed = ico.nextSibling.nodeValue.trim();
+                        if (/^\d+$/.test(trimmed)) {
+                            ico.nextSibling.nodeValue = ` ${pet.coins} `;
+                        }
+                    }
+                    const parent = ico.parentElement;
+                    if (parent && parent.tagName === "DIV") {
+                        const nextSpan = parent.nextElementSibling;
+                        if (nextSpan && nextSpan.tagName === "SPAN" && /^\d+$/.test(nextSpan.textContent.trim())) {
+                            nextSpan.textContent = pet.coins;
+                        }
+                    }
+                }
+            });
+
+            // 4. Sync page coins if any using robust TreeWalker
+            const walk = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
+            let node;
+            while (node = walk.nextNode()) {
+                const parent = node.parentElement;
+                if (parent && (parent.tagName === "SCRIPT" || parent.tagName === "STYLE")) {
+                    continue;
+                }
+                const text = node.nodeValue.trim();
+                if (/^(?:\|?\s*金幣\s*[:：]\s*\d+|餘額\s*[:：]\s*\d+\s*枚?金幣|Coins\s*[:：]\s*\d+)$/.test(text)) {
+                    node.nodeValue = node.nodeValue.replace(/\d+/, pet.coins);
+                }
+            }
+
+            // 4. Sync custom posts on Discussion Page (_5/code.html)
+            if (window.location.pathname.includes("_5")) {
+                const questionContainer = document.getElementById("discussion-questions-list");
+                const savedCustomPosts = localStorage.getItem("studypet_custom_posts");
+                if (questionContainer && savedCustomPosts) {
+                    const customPosts = JSON.parse(savedCustomPosts);
+                    if (customPosts.length > 0) {
+                        const emptyPlaceholder = questionContainer.querySelector("#empty-state-placeholder");
+                        if (emptyPlaceholder) {
+                            emptyPlaceholder.style.display = "none";
+                        }
+                    }
+                    customPosts.forEach((post, index) => {
+                        const article = document.createElement("article");
+                        article.setAttribute("onclick", "window.location.href='../_12/code.html?id=" + index + "'");
+                        article.className = "bg-surface-container-lowest border border-surface-variant rounded-lg p-lg shadow-sm hover:shadow-md transition-shadow cursor-pointer relative group";
+                        
+                        // Parse boardId or map it from boardName
+                        const nameToId = {
+                            "電資學院": "ceecs", "機電學院": "cmee", "工程學院": "coe",
+                            "管理學院": "com", "設計學院": "cod", "人文與社會科學學院": "chss"
+                        };
+                        let bId = post.boardId;
+                        if (!bId && post.boardName) {
+                            const cleanName = post.boardName.replace(/^[^\w\u4e00-\u9fa5]+/, "").trim();
+                            for (const name in nameToId) {
+                                if (cleanName.includes(name) || name.includes(cleanName)) {
+                                    bId = nameToId[name];
+                                    break;
+                                }
+                            }
+                        }
+                        article.setAttribute("data-board-id", bId || "unknown");
+                        
+                        article.innerHTML = `
+<div class="flex flex-col sm:flex-row gap-md">
+<div class="flex sm:flex-col items-center sm:items-end justify-start sm:w-24 gap-sm sm:gap-xs text-secondary shrink-0 order-2 sm:order-1 mt-md sm:mt-0 pt-md sm:pt-0 border-t sm:border-t-0 border-surface-variant">
+<div class="flex items-center gap-xs">
+<span class="font-body-md text-body-md">0</span>
+<span class="text-label-md font-label-md">回覆</span>
+</div>
+<div class="flex items-center gap-xs">
+<span class="font-body-md text-body-md">1</span>
+<span class="text-label-md font-label-md">瀏覽</span>
+</div>
+<div class="flex items-center gap-xs bg-tertiary-container text-on-tertiary-container px-sm py-[2px] rounded-sm mt-xs">
+<span class="material-symbols-outlined text-[14px]">generating_tokens</span>
+<span class="font-label-md text-label-md">${post.bounty}</span>
+</div>
+</div>
+<div class="flex-1 order-1 sm:order-2">
+<div class="flex items-center gap-sm mb-sm text-secondary font-label-md text-label-md">
+<div class="w-6 h-6 rounded-full bg-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary-container text-[14px]">person</span>
+</div>
+<span class="text-on-surface-variant">${user.username} (${user.department})</span>
+<span>•</span>
+<span>剛剛</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-primary mb-xs group-hover:text-surface-tint transition-colors text-[20px]">${post.title}</h2>
+<p class="text-on-surface-variant font-body-md text-body-md line-clamp-2 mb-md">
+    ${post.content}
+</p>
+<div class="flex flex-wrap gap-xs">
+<span class="px-sm py-[2px] bg-secondary-container text-on-secondary-container rounded-sm font-label-md text-label-md text-[11px]">#${post.boardName}</span>
+<span class="px-sm py-[2px] bg-secondary-container text-on-secondary-container rounded-sm font-label-md text-label-md text-[11px]">#${post.deptName}</span>
+<span class="px-sm py-[2px] bg-secondary-container text-on-secondary-container rounded-sm font-label-md text-label-md text-[11px]">#Bounty${post.bounty}</span>
+</div>
+</div>
+</div>`;
+                        questionContainer.insertBefore(article, questionContainer.firstChild);
+                    });
+                }
+            }
+
+            // 5. Dynamic Tag clicking and decoration
+            function makeTagsClickable() {
+                const allElements = document.querySelectorAll("span, button, div.inline-flex");
+                allElements.forEach(el => {
+                    const text = el.textContent.trim();
+                    if (text.startsWith("#") && text.length > 1 && !el.querySelector("*") && !el.dataset.tagBound) {
+                        el.dataset.tagBound = "true";
+                        el.style.cursor = "pointer";
+                        el.classList.add("hover:underline");
+                        el.addEventListener("mouseenter", () => { el.style.opacity = "0.75"; });
+                        el.addEventListener("mouseleave", () => { el.style.opacity = "1"; });
+                        el.addEventListener("click", (e) => {
+                            e.stopPropagation();
+                            e.preventDefault();
+                            const tagText = text.replace(/^#\s*/, "");
+                            const relPath5 = window.location.pathname.includes("_5") ? "code.html" : "../_5/code.html";
+                            window.location.href = `${relPath5}?tag=${encodeURIComponent(tagText)}`;
+                        });
+                    }
+                });
+            }
+            makeTagsClickable();
+        }
+    } catch(e) {
+        console.error("Error syncing state from localStorage:", e);
+    }
+});
+</script>
+
+<script id="global-coin-live-sync">
+(function () {
+  function readPet() {
+    let pet;
+    try { pet = JSON.parse(localStorage.getItem("studypet_pet") || "{}"); } catch (e) { pet = {}; }
+    if (typeof pet.coins !== "number") pet.coins = Number(pet.coins || 120);
+    if (!pet.hp) pet.hp = 500;
+    if (!pet.maxHp) pet.maxHp = 500;
+    localStorage.setItem("studypet_pet", JSON.stringify(pet));
+    return pet;
+  }
+
+  function syncCoins() {
+    const pet = readPet();
+    const coins = Number(pet.coins) || 0;
+
+    document.querySelectorAll(".global-coin-display, [data-coin-balance]").forEach(el => {
+      el.textContent = coins;
+    });
+
+    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+      acceptNode(node) {
+        const parent = node.parentElement;
+        if (!parent || ["SCRIPT", "STYLE", "TEXTAREA", "INPUT", "OPTION"].includes(parent.tagName)) return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+
+    let node;
+    while ((node = walker.nextNode())) {
+      const text = node.nodeValue;
+      if (/金幣\s*[:：]\s*\d+/.test(text)) {
+        node.nodeValue = text.replace(/(金幣\s*[:：]\s*)\d+/, `$1${coins}`);
+      } else if (/餘額\s*[:：]\s*\d+\s*枚?金幣/.test(text)) {
+        node.nodeValue = text.replace(/(餘額\s*[:：]\s*)\d+(\s*枚?金幣)/, `$1${coins}$2`);
+      } else if (/Coins\s*[:：]\s*\d+/i.test(text)) {
+        node.nodeValue = text.replace(/(Coins\s*[:：]\s*)\d+/i, `$1${coins}`);
+      }
+    }
+
+    // 個人檔案統計卡：總金幣 / Coins
+    document.querySelectorAll(".bg-surface.rounded-lg.p-md, .bg-surface-container-lowest, .bg-surface-container-high, .rounded-lg").forEach(card => {
+      const label = Array.from(card.querySelectorAll("span,p,div")).find(el => /總金幣|目前金幣|Coins/.test(el.textContent || ""));
+      if (!label) return;
+      const candidates = Array.from(card.querySelectorAll(".text-on-surface, .text-primary, .font-bold, span, p")).filter(el => /^\d+$/.test((el.textContent || "").trim()));
+      if (candidates[0]) candidates[0].textContent = coins;
+    });
+  }
+
+  const originalSetItem = localStorage.setItem;
+  localStorage.setItem = function (key, value) {
+    originalSetItem.apply(this, arguments);
+    if (key === "studypet_pet") setTimeout(syncCoins, 0);
+  };
+
+  window.syncPetScholarCoins = syncCoins;
+  document.addEventListener("DOMContentLoaded", syncCoins);
+  window.addEventListener("pageshow", syncCoins);
+  window.addEventListener("storage", e => { if (e.key === "studypet_pet") syncCoins(); });
+})();
+</script>
+
+
+<script id="petscholar-nav-cleanup">
+document.addEventListener("DOMContentLoaded", () => {
+  const applyNavCleanup = () => {
+    document.querySelectorAll('a').forEach(a => {
+      if ((a.textContent || '').trim().includes('資料結構')) {
+        const li = a.closest('li');
+        if (li) li.remove();
+        else a.remove();
+      }
+    });
+  };
+  applyNavCleanup();
+  setTimeout(applyNavCleanup, 80);
+  setTimeout(applyNavCleanup, 300);
+});
+</script>
+</body>
+</html>

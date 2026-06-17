@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-Hant"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PetScholar - 討論版</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline-variant": "#c3c7cc",
+                        "on-tertiary-fixed-variant": "#5c4127",
+                        "on-secondary-fixed-variant": "#40484f",
+                        "inverse-on-surface": "#f2f0f1",
+                        "tertiary-container": "#e1bb98",
+                        "primary-container": "#aec5d9",
+                        "on-tertiary-fixed": "#2b1702",
+                        "surface-bright": "#faf9fa",
+                        "on-secondary-container": "#5d656d",
+                        "on-surface": "#1b1c1d",
+                        "tertiary-fixed-dim": "#e6bf9c",
+                        "on-tertiary": "#ffffff",
+                        "secondary-container": "#dbe3ec",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-container": "#654a2e",
+                        "outline": "#73777c",
+                        "surface-container-low": "#f5f3f4",
+                        "on-surface-variant": "#43474c",
+                        "on-background": "#1b1c1d",
+                        "secondary": "#575f67",
+                        "primary-fixed-dim": "#b2c9dd",
+                        "on-primary-fixed-variant": "#33495a",
+                        "inverse-primary": "#b2c9dd",
+                        "surface-container-high": "#e9e8e9",
+                        "surface-dim": "#dbdada",
+                        "on-primary-fixed": "#051e2c",
+                        "tertiary": "#76593c",
+                        "surface-container": "#efedee",
+                        "on-primary-container": "#3c5263",
+                        "surface-tint": "#4b6172",
+                        "background": "#faf9fa",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed-dim": "#bfc7d0",
+                        "on-secondary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed": "#ffdcbe",
+                        "error": "#ba1a1a",
+                        "surface": "#faf9fa",
+                        "inverse-surface": "#303031",
+                        "surface-container-highest": "#e3e2e3",
+                        "primary-fixed": "#cee5fa",
+                        "primary": "#4b6172",
+                        "on-error": "#ffffff",
+                        "secondary-fixed": "#dbe3ec",
+                        "on-error-container": "#93000a",
+                        "surface-variant": "#e3e2e3",
+                        "on-secondary-fixed": "#151c23"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "md": "16px",
+                        "xl": "32px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "32px",
+                        "xs": "4px",
+                        "lg": "24px",
+                        "sm": "8px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .fill-icon {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+
+<style id="petscholar-nav-fix">
+  .top-nav-fixed { gap: 3em !important; }
+  .top-nav-fixed a { white-space: nowrap; border-bottom: 2px solid transparent; padding-bottom: 0.25rem; }
+  .top-nav-fixed a.font-bold { border-bottom-color: currentColor; }
+  .petscholar-brand-link { text-decoration: none; cursor: pointer; }
+</style>
+
+<style id="ps-scrollable-side-tabs">
+/* 右側分頁列可滾動，避免分頁或寵物卡超出畫面 */
+aside.fixed {
+  overflow-y: auto !important;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+}
+aside.fixed > nav {
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 2px;
+}
+aside.fixed .mt-auto {
+  flex-shrink: 0;
+}
+aside.fixed::-webkit-scrollbar,
+aside.fixed > nav::-webkit-scrollbar {
+  width: 6px;
+}
+aside.fixed::-webkit-scrollbar-thumb,
+aside.fixed > nav::-webkit-scrollbar-thumb {
+  background: rgba(115, 119, 124, .35);
+  border-radius: 999px;
+}
+</style>
+
+</head>
+<body class="bg-background text-on-background font-body-md text-body-md antialiased overflow-x-hidden min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 flex items-center justify-between px-margin-desktop h-16 bg-surface dark:bg-surface-container-low font-body-md text-body-md docked full-width top-0 bg-surface-container-low dark:bg-surface-container shadow-sm transition-all duration-200 ease-in-out">
+<div class="flex items-center gap-md">
+<a href="../../index.html" class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed cursor-pointer petscholar-brand-link">PetScholar</a>
+<div class="hidden md:flex items-center gap-lg">
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-colors" href="../_2/code.html">看板</a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-colors" href="../_3/code.html">自習室</a>
+<a class="text-primary dark:text-primary-fixed font-bold border-b-2 border-primary dark:border-primary-fixed pb-1 flex-col" href="../_5/code.html">討論版</a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-colors" href="../_6/code.html">寵物餵食</a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-colors" href="../_7/code.html">寵物商城</a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-colors" href="../_8/code.html">排行榜</a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-colors" href="../_9/code.html">個人檔案</a>
+</div>
+</div>
+<div class="flex items-center gap-md">
+
+<a href="../_1/code.html" title="前往登入 / 註冊頁" style="text-decoration:none;" class="bg-primary text-on-primary px-4 py-2 rounded-full font-label-md hover:bg-surface-tint transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">login</span>
+<span>會員登入</span>
+</a>
+</div>
+</nav>
+<!-- SideNavBar -->
+<aside class="hidden md:flex fixed right-0 top-16 h-[calc(100vh-64px)] w-64 flex-col p-md border-l border-outline-variant dark:border-outline bg-surface-container dark:bg-surface-container-high docked right-0 text-primary dark:text-primary-fixed-dim font-label-md text-label-md bg-surface-container dark:bg-surface-container-high shadow-md">
+<div class="flex flex-col items-center mb-xl pt-lg border-b border-outline-variant pb-lg">
+<div class="w-20 h-20 rounded-full bg-tertiary-container mb-sm flex items-center justify-center border-2 border-surface">
+<span class="material-symbols-outlined text-on-tertiary-container text-[40px]">pets</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary">帳戶狀態</h3>
+<p class="text-on-surface-variant mt-xs"><span class="flex items-center gap-xs"><span class="flex text-error"><span class="material-symbols-outlined fill-icon text-[18px]">favorite</span><span class="material-symbols-outlined fill-icon text-[18px]">favorite</span><span class="material-symbols-outlined fill-icon text-[18px]">favorite</span><span class="material-symbols-outlined fill-icon text-[18px]">favorite</span><span class="material-symbols-outlined fill-icon text-[18px]">favorite</span></span><span class="ml-xs">| 金幣: 120</span></span></p>
+<button class="mt-md w-full py-sm bg-primary text-on-primary rounded-lg hover:bg-surface-tint transition-colors shadow-sm font-label-md text-label-md">
+                治療寵物
+            </button>
+</div>
+<nav class="flex-1 flex flex-col gap-sm">
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-variant rounded-lg hover:bg-surface-container-highest dark:hover:bg-surface-variant scale-95 active:scale-90 transition-transform" href="../_2/code.html">
+<span class="material-symbols-outlined text-[20px]">dashboard</span>
+                看板
+            </a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-variant rounded-lg hover:bg-surface-container-highest dark:hover:bg-surface-variant scale-95 active:scale-90 transition-transform" href="../_3/code.html">
+<span class="material-symbols-outlined text-[20px]">local_library</span>
+                自習室
+            </a>
+<a class="flex items-center gap-md px-md py-sm bg-primary-container text-on-primary-container rounded-lg hover:bg-surface-container-highest dark:hover:bg-surface-variant scale-95 active:scale-90 transition-transform" href="../_5/code.html">
+<span class="material-symbols-outlined fill-icon text-[20px]">forum</span>
+                討論版
+            </a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-variant rounded-lg hover:bg-surface-container-highest dark:hover:bg-surface-variant scale-95 active:scale-90 transition-transform" href="../_6/code.html">
+<span class="material-symbols-outlined text-[20px]">restaurant</span>
+                寵物餵食
+            </a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-variant rounded-lg hover:bg-surface-container-highest dark:hover:bg-surface-variant scale-95 active:scale-90 transition-transform" href="../_7/code.html">
+<span class="material-symbols-outlined text-[20px]">storefront</span>
+                寵物商城
+            </a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-variant rounded-lg hover:bg-surface-container-highest dark:hover:bg-surface-variant scale-95 active:scale-90 transition-transform" href="../_8/code.html">
+<span class="material-symbols-outlined text-[20px]">leaderboard</span>
+                排行榜
+            </a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-variant rounded-lg hover:bg-surface-container-highest dark:hover:bg-surface-variant scale-95 active:scale-90 transition-transform" href="../_9/code.html">
+<span class="material-symbols-outlined text-[20px]">person</span>
+                個人檔案
+            </a>
+</nav>
+<div class="mt-auto flex flex-col gap-sm pt-md border-t border-outline-variant">
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-variant rounded-lg hover:bg-surface-container-highest dark:hover:bg-surface-variant scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined text-[20px]">help</span>
+                說明
+            </a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-variant rounded-lg hover:bg-surface-container-highest dark:hover:bg-surface-variant scale-95 active:scale-90 transition-transform" href="../../index.html">
+<span class="material-symbols-outlined text-[20px]">logout</span>
+                登出
+            </a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 mt-16 md:mr-64 p-margin-mobile md:p-margin-desktop bg-background transition-all">
+<!-- Header & Actions -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between mb-xl gap-md">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-xs">學術討論版</h1>
+<p class="text-secondary font-body-lg text-body-lg">尋找解答，分享知識，賺取懸賞金幣。</p>
+</div>
+<a href="../_11/code.html" class="bg-primary text-on-primary px-lg py-md rounded-lg flex items-center justify-center gap-sm hover:bg-surface-tint shadow-sm transition-all focus:ring-2 focus:ring-primary-container focus:outline-none text-decoration-none" style="text-decoration:none;">
+<span class="material-symbols-outlined">edit_square</span>
+<span class="font-label-md text-label-md text-[14px]">發問</span>
+</a>
+</div>
+<!-- Filters -->
+<div class="flex flex-wrap items-center gap-sm mb-lg">
+<button class="px-md py-xs rounded-full bg-primary-container text-on-primary-container border border-transparent font-label-md text-label-md transition-colors">
+                全部
+            </button>
+<button class="px-md py-xs rounded-full bg-surface text-secondary border border-outline-variant hover:bg-surface-container font-label-md text-label-md transition-colors">
+                未解答
+            </button>
+<button class="px-md py-xs rounded-full bg-surface text-secondary border border-outline-variant hover:bg-surface-container font-label-md text-label-md transition-colors">
+                已解決
+            </button>
+<div class="ml-auto flex items-center gap-xs">
+<span class="text-secondary text-label-md font-label-md mr-xs">排序:</span>
+<select class="bg-surface border border-outline-variant text-on-surface text-body-md rounded-lg py-xs pl-sm pr-lg focus:ring-primary focus:border-primary cursor-pointer transition-colors">
+<option>最新發布</option>
+<option>最高懸賞</option>
+<option>最多回覆</option>
+</select>
+</div>
+</div>
+<!-- Question List -->
+<div id="discussion-questions-list" class="flex flex-col gap-md">
+<!-- Empty State Placeholder -->
+<div id="empty-state-placeholder" class="flex flex-col items-center justify-center py-xl px-md bg-surface-container-lowest border border-dashed border-outline-variant/60 rounded-xl text-center p-8 shadow-sm">
+<span class="material-symbols-outlined text-[64px] text-outline mb-md" style="font-size:64px; color:#73777c;">forum</span>
+<h3 class="font-headline-md text-headline-md text-primary mb-sm">目前還沒有任何使用者發問</h3>
+<p class="font-body-md text-body-md text-secondary max-w-md mb-md">
+    這裡將會顯示大家討論的內容。目前還沒有使用者輸入問題，點擊右上方「發表發問」按鈕，即可開始發布您的第一篇學業交流問題！
+</p>
+<a href="../_11/code.html" class="bg-primary hover:bg-surface-tint text-on-primary px-lg py-md rounded-lg font-label-md text-label-md flex items-center justify-center gap-xs shadow-sm transition-all focus:ring-2 focus:ring-primary-container focus:outline-none" style="text-decoration:none;">
+<span class="material-symbols-outlined text-[18px]">edit_square</span>
+<span>發表第一篇發問</span>
+</a>
+</div>
+</div>
+<!-- Pagination (Simple) -->
+<div class="flex justify-center items-center gap-md mt-xl pb-xl">
+<button class="w-8 h-8 flex items-center justify-center rounded-full text-secondary hover:bg-surface-container disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-[20px]">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-full bg-primary text-on-primary font-label-md text-label-md shadow-sm">1</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container font-label-md text-label-md">2</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container font-label-md text-label-md">3</button>
+<span class="text-secondary">...</span>
+<button class="w-8 h-8 flex items-center justify-center rounded-full text-secondary hover:bg-surface-container">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</button>
+</div>
+</main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script id="sync-localstate">
+document.addEventListener("DOMContentLoaded", () => {
+    try {
+        const savedUser = localStorage.getItem("studypet_user");
+        const savedPet = localStorage.getItem("studypet_pet");
+        if (savedUser && savedPet) {
+            const user = JSON.parse(savedUser);
+            const pet = JSON.parse(savedPet);
+            
+            // Enforce pet hp range and defaults for 5 hearts (each heart is 100 HP)
+            if (pet.hp === 100 || !pet.hp) {
+                pet.hp = 500;
+                pet.baseHp = 500;
+                pet.lastActivityTime = Date.now();
+            }
+            if (!pet.baseHp) pet.baseHp = pet.hp;
+            if (!pet.lastActivityTime) pet.lastActivityTime = Date.now();
+
+            // Calculate hourly drop (10 HP per hour of inactivity since last activity)
+            const elapsed = Date.now() - pet.lastActivityTime;
+            const hoursElapsed = Math.floor(elapsed / (3600 * 1000));
+            const hpLoss = hoursElapsed * 10;
+            const newHp = Math.max(0, pet.baseHp - hpLoss);
+            
+            if (pet.hp !== newHp) {
+                pet.hp = newHp;
+                pet.hearts = Math.ceil(newHp / 100);
+                localStorage.setItem("studypet_pet", JSON.stringify(pet));
+            }
+
+            // Sync user avatar based on gender setting
+            const maleAvatar = "https://lh3.googleusercontent.com/aida-public/AB6AXuBHaUoUmD0NCQT0xkjGAhDfZcg0aBzllN0eFaNJtLBJf8cc_LGkd5eJLBbe92XyjZcFmqtTtPMy4nmqui7orI5FCwxtzZipXn7IT-ADqLhM-YTMnLuhwW5IkvAQb9VJ8EQNXDa-NeT0hvQnvHccj3YXgjW3PbfLOycAjzkdgDJWR7eHCVwig2L_UZfEHNjKWxKHhiTtGZPC5nhE25w7fJW4k4D14gGtDhExwWSmAB903j0EwwVPcfvR4EdG5X-hEsi442t72MF0CECQ";
+            const femaleAvatar = "https://lh3.googleusercontent.com/aida-public/AB6AXuD6nYakPwha1xLE6ySgmmA3ALzCOIWvd5yKYtNc6I559vHmzcy6tuMKiyMt_XVU9C_i2EE6LXL3kR7esJW5Vpg8sdOkC99wKCsBwwj-CV7gOl85EXPmZozLCJMLTjfCgo1E6AQrurCE2oitnwoxspLZLgSj20zFdeIiRstXmq7pUoQT_fSqQiKZGslhXyPRUYFNP29JUCFo5YTkvdhoZJRshYhOdgiFeOqTl5IYb-_t46ECQsIlHcmedAhJ2jr9xN-EwM-PC-MeQ0SO";
+            const avatarUrl = user.avatarDataUrl || (user.gender === "male" ? maleAvatar : femaleAvatar);
+            
+            const navAvatar = document.querySelector('img[alt="User avatar"]');
+            if (navAvatar) {
+                navAvatar.src = avatarUrl;
+            }
+            
+            const profileAvatar = document.querySelector('img[alt="Profile Picture"]');
+            if (profileAvatar && window.location.pathname.includes("_9")) {
+                profileAvatar.src = avatarUrl;
+            }
+            
+            // 1. Sync user details on Profile Page
+            const profileName = document.querySelector(".font-headline-lg.text-headline-lg.text-on-surface");
+            if (profileName && window.location.pathname.includes("_9")) {
+                profileName.textContent = user.username;
+                const profileDept = profileName.nextElementSibling;
+                if (profileDept && profileDept.classList.contains("font-body-lg")) {
+                    profileDept.textContent = user.department;
+                }
+                const profileBio = document.querySelector(".font-body-md.text-body-md.text-on-surface-variant.max-w-md");
+                if (profileBio && user.bio) {
+                    profileBio.textContent = user.bio;
+                }
+                const statsCards = document.querySelectorAll(".bg-surface.rounded-lg.p-md");
+                statsCards.forEach(card => {
+                    const label = card.querySelector(".text-secondary");
+                    if (label) {
+                        if (label.textContent.includes("目前等級") || label.textContent.includes("Level")) {
+                            const val = card.querySelector(".text-on-surface");
+                            if (val) val.textContent = `Lv. ${user.level || 1}`;
+                        }
+                        if (label.textContent.includes("總金幣") || label.textContent.includes("Coins")) {
+                            const val = card.querySelector(".text-on-surface");
+                            if (val) val.textContent = pet.coins;
+                        }
+                    }
+                });
+            }
+
+            // 2. Sync Sidebar Pet status
+            const aside = document.querySelector("aside");
+            if (aside) {
+                // Sync Pet Name
+                const petHeader = aside.querySelector("h2, h3");
+                if (petHeader) {
+                    petHeader.textContent = pet.name || "未命名小精靈";
+                }
+
+                // Sync Pet Mascot Type Avatar
+                const mascotEmojis = {
+                    robot: "🤖",
+                    rat: "🐭", ox: "🐮", tiger: "🐯", rabbit: "🐰",
+                    dragon: "🐲", snake: "🐍", horse: "🐴", goat: "🐐",
+                    monkey: "🐵", rooster: "🐔", dog: "🐶", pig: "🐷",
+                    cat: "🐱", panda: "🐼"
+                };
+                const asideImg = aside.querySelector("img");
+                if (asideImg) {
+                    const emojiSpan = document.createElement("span");
+                    emojiSpan.style.fontSize = "48px";
+                    emojiSpan.style.lineHeight = "1";
+                    emojiSpan.style.marginBottom = "8px";
+                    emojiSpan.textContent = mascotEmojis[pet.mascotType] || "🤖";
+                    asideImg.parentNode.replaceChild(emojiSpan, asideImg);
+                } else {
+                    const petsSpan = aside.querySelector('.material-symbols-outlined');
+                    if (petsSpan && petsSpan.textContent.trim() === 'pets') {
+                        petsSpan.parentNode.innerHTML = `<span style="font-size: 48px; line-height: 1; margin-bottom: 8px;">${mascotEmojis[pet.mascotType] || "🤖"}</span>`;
+                    }
+                }
+
+                // Sync Pet Level in the Level Badge (like Lv.5 badge)
+                const lvlBadge = aside.querySelector(".bg-error.text-on-error, .absolute.-bottom-2.-right-2");
+                if (lvlBadge) {
+                    lvlBadge.textContent = `Lv.${pet.level || 1}`;
+                }
+                
+                // Sync Pet HP numeric text below hearts in sidebar
+                let hpLabel = aside.querySelector("#sidebar-pet-hp");
+                if (!hpLabel) {
+                    hpLabel = document.createElement("div");
+                    hpLabel.id = "sidebar-pet-hp";
+                    hpLabel.className = "text-on-surface-variant text-[11px] font-medium mb-1 text-center";
+                    const heartDiv = aside.querySelector(".flex.items-center.justify-center.gap-xs, .flex.items-center.justify-center.gap-1");
+                    if (heartDiv) {
+                        heartDiv.parentNode.insertBefore(hpLabel, heartDiv.nextSibling);
+                    }
+                }
+                if (hpLabel) {
+                    hpLabel.textContent = `生命值：${pet.hp} / 500`;
+                }
+                // Sync healing button action
+                const healBtn = aside.querySelector("button");
+                if (healBtn && (healBtn.textContent.includes("治療") || healBtn.textContent.includes("Heal"))) {
+                    healBtn.onclick = () => {
+                        if (pet.hp >= 500) {
+                            alert("您的寵物非常健康，目前不需要治療！");
+                            return;
+                        }
+                        if (pet.coins >= 20) {
+                            pet.coins -= 20;
+                            pet.hp = 500;
+                            pet.baseHp = 500;
+                            pet.hearts = 5;
+                            pet.lastActivityTime = Date.now();
+                            localStorage.setItem("studypet_pet", JSON.stringify(pet));
+                            alert("治療成功！扣除 20 金幣，HP 已完全恢復！");
+                            window.location.reload();
+                        } else {
+                            alert("金幣不足！治療需要 20 金幣。");
+                        }
+                    };
+
+                    // Dynamic "Simulate 1 Hour" button in sidebar
+                    if (!aside.querySelector("#btn-simulate-time")) {
+                        const simBtn = document.createElement("button");
+                        simBtn.id = "btn-simulate-time";
+                        simBtn.className = "w-full py-2 mt-2 bg-secondary/15 hover:bg-secondary/25 text-secondary dark:text-secondary-fixed-dim font-label-md text-label-md rounded-lg border border-outline-variant/30 transition-all";
+                        simBtn.textContent = "模擬時間流逝 1 小時 ⏳";
+                        simBtn.onclick = () => {
+                            pet.lastActivityTime = (pet.lastActivityTime || Date.now()) - (3600 * 1000);
+                            localStorage.setItem("studypet_pet", JSON.stringify(pet));
+                            alert("已模擬流逝 1 小時！");
+                            window.location.reload();
+                        };
+                        healBtn.parentNode.insertBefore(simBtn, healBtn.nextSibling);
+                    }
+                }
+            }
+
+            // 2b. Inject Visualizer and Professor tabs dynamically
+            const asideNav = document.querySelector("aside nav.flex-1");
+            if (asideNav) {
+                if (!asideNav.querySelector('a[href*="_14"]')) {
+                    const isProfPage = window.location.pathname.includes("_14");
+                    const profLink = document.createElement("a");
+                    profLink.href = "../_14/code.html";
+                    profLink.className = isProfPage
+                        ? "bg-primary-container text-on-primary-container rounded-lg flex items-center gap-md px-md py-sm transition-transform scale-95 active:scale-90"
+                        : "text-on-surface-variant hover:bg-surface-variant rounded-lg flex items-center gap-md px-md py-sm hover:bg-surface-container-highest dark:hover:bg-surface-variant transition-transform scale-95 active:scale-90";
+                    profLink.innerHTML = `<span class="material-symbols-outlined">school</span><span>課程教授主頁</span>`;
+                    asideNav.appendChild(profLink);
+                }
+            }
+
+            const topNavList = document.querySelector("nav ul.hidden.lg\:flex");
+            if (topNavList) {
+                if (!topNavList.querySelector('a[href*="_14"]')) {
+                    const isProfPage = window.location.pathname.includes("_14");
+                    const profLi = document.createElement("li");
+                    profLi.className = "h-full flex items-center";
+                    profLi.innerHTML = `<a class="${isProfPage ? 'text-primary dark:text-primary-fixed font-bold border-b-2 border-primary dark:border-primary-fixed' : 'text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-colors'} h-full flex items-center px-2" href="../_14/code.html">教授主頁</a>`;
+                    topNavList.appendChild(profLi);
+                }
+            }
+
+            // 3. Global Heart (HP) and Coins Synchronization
+            const allSpans = document.querySelectorAll(".material-symbols-outlined");
+            const heartContainers = new Set();
+            allSpans.forEach(span => {
+                if (span.textContent.trim() === "favorite") {
+                    const parent = span.parentElement;
+                    if (parent) {
+                        heartContainers.add(parent);
+                    }
+                }
+            });
+            
+            const heartCount = Math.ceil(pet.hp / 100);
+            
+            heartContainers.forEach(container => {
+                const spans = Array.from(container.children).filter(el => el.textContent.trim() === "favorite");
+                if (spans.length > 1) {
+                    while (spans.length < 5) {
+                        const newSpan = document.createElement("span");
+                        newSpan.className = spans[0] ? spans[0].className : "material-symbols-outlined text-error text-sm";
+                        newSpan.textContent = "favorite";
+                        container.appendChild(newSpan);
+                        spans.push(newSpan);
+                    }
+                    while (spans.length > 5) {
+                        const lastSpan = spans.pop();
+                        container.removeChild(lastSpan);
+                    }
+                    spans.forEach((span, i) => {
+                        const fill = i < heartCount ? 1 : 0;
+                        span.style.fontVariationSettings = `'FILL' ${fill}, 'wght' 400, 'GRAD' 0, 'opsz' 24`;
+                        if (span.style.cssText.includes("FILL")) {
+                            span.style.cssText = span.style.cssText.replace(/FILL'\s*\d/, `FILL' ${fill}`);
+                        }
+                        if (fill) {
+                            span.classList.add("icon-fill");
+                        } else {
+                            span.classList.remove("icon-fill");
+                        }
+                    });
+
+                    // Dynamic HP text next to multi-heart container (excluding sidebar)
+                    if (!container.closest("aside")) {
+                        const parent = container.parentElement;
+                        if (parent) {
+                            let hpSpan = parent.querySelector(".hp-text-badge");
+                            if (!hpSpan) {
+                                hpSpan = document.createElement("span");
+                                hpSpan.className = "hp-text-badge text-[11px] font-semibold text-secondary ml-xs shrink-0";
+                                parent.appendChild(hpSpan);
+                            }
+                            hpSpan.textContent = `(${pet.hp}/500)`;
+                        }
+                    }
+                } else if (spans.length === 1) {
+                    const span = spans[0];
+                    const fill = heartCount > 0 ? 1 : 0;
+                    span.style.fontVariationSettings = `'FILL' ${fill}, 'wght' 400, 'GRAD' 0, 'opsz' 24`;
+                    if (span.style.cssText.includes("FILL")) {
+                        span.style.cssText = span.style.cssText.replace(/FILL'\s*\d/, `FILL' ${fill}`);
+                    }
+                    if (fill) {
+                        span.classList.add("icon-fill");
+                    } else {
+                        span.classList.remove("icon-fill");
+                    }
+                    
+                    if (span.nextSibling && span.nextSibling.nodeType === Node.TEXT_NODE) {
+                        span.nextSibling.nodeValue = ` ${heartCount} (生命值: ${pet.hp}/500) `;
+                    }
+                    const parent = span.parentElement;
+                    if (parent) {
+                        parent.childNodes.forEach(node => {
+                            if (node.nodeType === Node.TEXT_NODE) {
+                                node.nodeValue = ` ${heartCount} (生命值: ${pet.hp}/500) `;
+                            }
+                        });
+                    }
+                }
+            });
+
+            // Sync Coins text next to monetization_on globally
+            allSpans.forEach(ico => {
+                if (ico.textContent.trim() === "monetization_on") {
+                    if (ico.closest(".bg-surface-bright") || ico.closest("[id^='shop-item-']") || ico.closest("#full-shop-container") || ico.closest("#quick-shop-container") || ico.closest("[id^='quick-item-']")) {
+                        return;
+                    }
+                    if (ico.nextSibling && ico.nextSibling.nodeType === Node.TEXT_NODE) {
+                        const trimmed = ico.nextSibling.nodeValue.trim();
+                        if (/^\d+$/.test(trimmed)) {
+                            ico.nextSibling.nodeValue = ` ${pet.coins} `;
+                        }
+                    }
+                    const parent = ico.parentElement;
+                    if (parent && parent.tagName === "DIV") {
+                        const nextSpan = parent.nextElementSibling;
+                        if (nextSpan && nextSpan.tagName === "SPAN" && /^\d+$/.test(nextSpan.textContent.trim())) {
+                            nextSpan.textContent = pet.coins;
+                        }
+                    }
+                }
+            });
+
+            // 4. Sync page coins if any using robust TreeWalker
+            const walk = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
+            let node;
+            while (node = walk.nextNode()) {
+                const parent = node.parentElement;
+                if (parent && (parent.tagName === "SCRIPT" || parent.tagName === "STYLE")) {
+                    continue;
+                }
+                const text = node.nodeValue.trim();
+                if (/^(?:\|?\s*金幣\s*[:：]\s*\d+|餘額\s*[:：]\s*\d+\s*枚?金幣|Coins\s*[:：]\s*\d+)$/.test(text)) {
+                    node.nodeValue = node.nodeValue.replace(/\d+/, pet.coins);
+                }
+            }
+
+            // 4. Sync custom posts on Discussion Page (_5/code.html)
+            if (window.location.pathname.includes("_5")) {
+                const questionContainer = document.getElementById("discussion-questions-list");
+                const savedCustomPosts = localStorage.getItem("studypet_custom_posts");
+                if (questionContainer && savedCustomPosts) {
+                    const customPosts = JSON.parse(savedCustomPosts);
+                    if (customPosts.length > 0) {
+                        const emptyPlaceholder = questionContainer.querySelector("#empty-state-placeholder");
+                        if (emptyPlaceholder) {
+                            emptyPlaceholder.style.display = "none";
+                        }
+                    }
+                    customPosts.forEach((post, index) => {
+                        const article = document.createElement("article");
+                        article.setAttribute("onclick", "window.location.href='../_12/code.html?id=" + index + "'");
+                        article.className = "bg-surface-container-lowest border border-surface-variant rounded-lg p-lg shadow-sm hover:shadow-md transition-shadow cursor-pointer relative group";
+                        
+                        // Parse boardId or map it from boardName
+                        const nameToId = {
+                            "電資學院": "ceecs", "機電學院": "cmee", "工程學院": "coe",
+                            "管理學院": "com", "設計學院": "cod", "人文與社會科學學院": "chss"
+                        };
+                        let bId = post.boardId;
+                        if (!bId && post.boardName) {
+                            const cleanName = post.boardName.replace(/^[^\w\u4e00-\u9fa5]+/, "").trim();
+                            for (const name in nameToId) {
+                                if (cleanName.includes(name) || name.includes(cleanName)) {
+                                    bId = nameToId[name];
+                                    break;
+                                }
+                            }
+                        }
+                        article.setAttribute("data-board-id", bId || "unknown");
+                        
+                        article.innerHTML = `
+<div class="flex flex-col sm:flex-row gap-md">
+<div class="flex sm:flex-col items-center sm:items-end justify-start sm:w-24 gap-sm sm:gap-xs text-secondary shrink-0 order-2 sm:order-1 mt-md sm:mt-0 pt-md sm:pt-0 border-t sm:border-t-0 border-surface-variant">
+<div class="flex items-center gap-xs">
+<span class="font-body-md text-body-md">0</span>
+<span class="text-label-md font-label-md">回覆</span>
+</div>
+<div class="flex items-center gap-xs">
+<span class="font-body-md text-body-md">1</span>
+<span class="text-label-md font-label-md">瀏覽</span>
+</div>
+<div class="flex items-center gap-xs bg-tertiary-container text-on-tertiary-container px-sm py-[2px] rounded-sm mt-xs">
+<span class="material-symbols-outlined text-[14px]">generating_tokens</span>
+<span class="font-label-md text-label-md">${post.bounty}</span>
+</div>
+</div>
+<div class="flex-1 order-1 sm:order-2">
+<div class="flex items-center gap-sm mb-sm text-secondary font-label-md text-label-md">
+<div class="w-6 h-6 rounded-full bg-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary-container text-[14px]">person</span>
+</div>
+<span class="text-on-surface-variant">${user.username} (${user.department})</span>
+<span>•</span>
+<span>剛剛</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-primary mb-xs group-hover:text-surface-tint transition-colors text-[20px]">${post.title}</h2>
+<p class="text-on-surface-variant font-body-md text-body-md line-clamp-2 mb-md">
+    ${post.content}
+</p>
+<div class="flex flex-wrap gap-xs">
+<span class="px-sm py-[2px] bg-secondary-container text-on-secondary-container rounded-sm font-label-md text-label-md text-[11px]">#${post.boardName}</span>
+<span class="px-sm py-[2px] bg-secondary-container text-on-secondary-container rounded-sm font-label-md text-label-md text-[11px]">#${post.deptName}</span>
+<span class="px-sm py-[2px] bg-secondary-container text-on-secondary-container rounded-sm font-label-md text-label-md text-[11px]">#Bounty${post.bounty}</span>
+</div>
+</div>
+</div>`;
+                        questionContainer.insertBefore(article, questionContainer.firstChild);
+                    });
+                }
+            }
+
+            // 5. Dynamic Tag clicking and decoration
+            function makeTagsClickable() {
+                const allElements = document.querySelectorAll("span, button, div.inline-flex");
+                allElements.forEach(el => {
+                    const text = el.textContent.trim();
+                    if (text.startsWith("#") && text.length > 1 && !el.querySelector("*") && !el.dataset.tagBound) {
+                        el.dataset.tagBound = "true";
+                        el.style.cursor = "pointer";
+                        el.classList.add("hover:underline");
+                        el.addEventListener("mouseenter", () => { el.style.opacity = "0.75"; });
+                        el.addEventListener("mouseleave", () => { el.style.opacity = "1"; });
+                        el.addEventListener("click", (e) => {
+                            e.stopPropagation();
+                            e.preventDefault();
+                            const tagText = text.replace(/^#\s*/, "");
+                            const relPath5 = window.location.pathname.includes("_5") ? "code.html" : "../_5/code.html";
+                            window.location.href = `${relPath5}?tag=${encodeURIComponent(tagText)}`;
+                        });
+                    }
+                });
+            }
+            makeTagsClickable();
+        }
+    } catch(e) {
+        console.error("Error syncing state from localStorage:", e);
+    }
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script id="board-filtering">
+let currentPage = 1;
+const POSTS_PER_PAGE = 3;
+let activeBoard = "全部";
+let activeStatus = "all";
+let activeTag = "";
+
+document.addEventListener("DOMContentLoaded", () => {
+    const filterBar = document.querySelector(".flex.flex-wrap.items-center.gap-sm.mb-lg");
+    if (filterBar) {
+        const colleges = ["⚡ 電資學院", "⚙️ 機電學院", "🏗️ 工程學院", "📈 管理學院", "🎨 設計學院", "🏛️ 人文與社會科學學院"];
+        
+        colleges.forEach((col, idx) => {
+            const btn = document.createElement("button");
+            btn.className = "px-md py-xs rounded-full bg-surface text-secondary border border-outline-variant hover:bg-surface-container font-label-md text-label-md transition-colors";
+            btn.textContent = col;
+            btn.onclick = () => {
+                const isActive = btn.classList.contains("bg-primary-container");
+                const boardButtons = Array.from(filterBar.querySelectorAll("button")).filter(b => !["全部", "未解答", "已解決"].includes(b.textContent.trim()));
+                boardButtons.forEach(b => {
+                    b.className = "px-md py-xs rounded-full bg-surface text-secondary border border-outline-variant hover:bg-surface-container font-label-md text-label-md transition-colors";
+                });
+                
+                if (isActive) {
+                    activeBoard = "全部";
+                } else {
+                    btn.className = "px-md py-xs rounded-full bg-primary-container text-on-primary-container border border-transparent font-label-md text-label-md transition-colors";
+                    activeBoard = col;
+                }
+                applyAllFilters();
+            };
+            filterBar.insertBefore(btn, filterBar.querySelector(".ml-auto"));
+        });
+        
+        // Setup status buttons
+        const statusButtons = Array.from(filterBar.querySelectorAll("button")).filter(b => ["全部", "未解答", "已解決"].includes(b.textContent.trim()));
+        statusButtons.forEach(btn => {
+            btn.onclick = () => {
+                statusButtons.forEach(b => {
+                    b.className = "px-md py-xs rounded-full bg-surface text-secondary border border-outline-variant hover:bg-surface-container font-label-md text-label-md transition-colors";
+                });
+                btn.className = "px-md py-xs rounded-full bg-primary-container text-on-primary-container border border-transparent font-label-md text-label-md transition-colors";
+                
+                const txt = btn.textContent.trim();
+                if (txt === "全部") activeStatus = "all";
+                else if (txt === "未解答") activeStatus = "unsolved";
+                else if (txt === "已解決") activeStatus = "solved";
+                
+                applyAllFilters();
+            };
+        });
+        
+        // Read query parameters
+        const params = new URLSearchParams(window.location.search);
+        const initialBoard = params.get("board");
+        const initialTag = params.get("tag");
+        
+        if (initialTag) {
+            activeTag = initialTag;
+            renderTagFilterNotice(initialTag);
+            applyAllFilters();
+        } else if (initialBoard) {
+            const boardButtons = Array.from(filterBar.querySelectorAll("button")).filter(b => !["全部", "未解答", "已解決"].includes(b.textContent.trim()));
+            boardButtons.forEach(btn => {
+                if (btn.textContent.trim().includes(initialBoard)) {
+                    btn.click();
+                }
+            });
+        } else {
+            applyAllFilters();
+        }
+    }
+});
+
+function applyAllFilters() {
+    const articles = document.querySelectorAll("#discussion-questions-list article");
+    let matchCount = 0;
+    
+    articles.forEach(art => {
+        const text = art.textContent.toLowerCase();
+        
+        // 1. Board Filter
+        let boardMatch = false;
+        const boardIdAttr = art.getAttribute("data-board-id");
+        if (activeBoard === "全部") {
+            boardMatch = true;
+        } else if (boardIdAttr) {
+            if (activeBoard.includes("機電")) boardMatch = (boardIdAttr === "cmee");
+            else if (activeBoard.includes("電資")) boardMatch = (boardIdAttr === "ceecs");
+            else if (activeBoard.includes("工程")) boardMatch = (boardIdAttr === "coe");
+            else if (activeBoard.includes("管理")) boardMatch = (boardIdAttr === "com");
+            else if (activeBoard.includes("設計")) boardMatch = (boardIdAttr === "cod");
+            else if (activeBoard.includes("人文")) boardMatch = (boardIdAttr === "chss");
+        } else {
+            // fallback text match if boardIdAttr is missing
+            if (activeBoard.includes("機電")) {
+                boardMatch = text.includes("機械") || text.includes("車輛") || text.includes("能源") || text.includes("機電") || text.includes("熱力學") || text.includes("gears") || text.includes("dynamics") || text.includes("thermodynamics") || text.includes("cmee");
+            } else if (activeBoard.includes("電資")) {
+                boardMatch = text.includes("電機") || text.includes("電子") || text.includes("資訊") || text.includes("光電") || text.includes("電路學") || text.includes("離散") || text.includes("傅立葉") || text.includes("circuits") || text.includes("ee") || text.includes("signals") || text.includes("dtft") || text.includes("cs") || text.includes("ceecs");
+            } else if (activeBoard.includes("工程")) {
+                boardMatch = text.includes("土木") || text.includes("化工") || text.includes("生技") || text.includes("材料") || text.includes("分子") || text.includes("chemical") || text.includes("concrete") || text.includes("coe");
+            } else if (activeBoard.includes("管理")) {
+                boardMatch = text.includes("工管") || text.includes("經營") || text.includes("資財") || text.includes("企管") || text.includes("專案管理") || text.includes("pm") || text.includes("finance") || text.includes("com");
+            } else if (activeBoard.includes("設計")) {
+                boardMatch = text.includes("建材") || text.includes("工設") || text.includes("建築") || text.includes("互動") || text.includes("創意") || text.includes("design") || text.includes("architecture") || text.includes("ui") || text.includes("ux") || text.includes("cod");
+            } else if (activeBoard.includes("人文")) {
+                boardMatch = text.includes("應英") || text.includes("文化") || text.includes("英文") || text.includes("english") || text.includes("culture") || text.includes("chss");
+            }
+        }
+        
+        // 2. Status Filter
+        const solvedSpan = Array.from(art.querySelectorAll("span")).find(s => s.textContent.trim() === "已解決");
+        const isSolved = !!solvedSpan;
+        let statusMatch = false;
+        if (activeStatus === "all") {
+            statusMatch = true;
+        } else if (activeStatus === "solved") {
+            statusMatch = isSolved;
+        } else if (activeStatus === "unsolved") {
+            statusMatch = !isSolved;
+        }
+        
+        // 3. Tag Filter
+        let tagMatch = true;
+        if (activeTag) {
+            tagMatch = text.includes(activeTag.toLowerCase());
+        }
+        
+        const totalMatch = boardMatch && statusMatch && tagMatch;
+        art.dataset.filterMatch = totalMatch ? "true" : "false";
+        if (totalMatch) matchCount++;
+    });
+    
+    const noticeText = document.getElementById("tag-filter-notice-text");
+    if (noticeText && activeTag) {
+        noticeText.innerHTML = `正在篩選標籤: <strong class="text-primary font-bold">#${activeTag}</strong> (找到 ${matchCount} 篇相關提問)`;
+    }
+
+    // 處理空狀態顯示/隱藏
+    const emptyPlaceholder = document.getElementById("empty-state-placeholder");
+    if (emptyPlaceholder) {
+        if (matchCount === 0) {
+            emptyPlaceholder.style.display = "flex";
+            const emptyTitle = emptyPlaceholder.querySelector("h3");
+            if (emptyTitle) emptyTitle.textContent = "目前還沒有任何使用者發問";
+            const emptyDesc = emptyPlaceholder.querySelector("p");
+            if (emptyDesc) {
+                emptyDesc.textContent = `這裡將會顯示大家討論的內容。目前還沒有符合「${activeBoard}」的學業問題，點擊下方「發表第一篇發問」按鈕即可開始發布您的第一篇學業交流問題！`;
+            }
+        } else {
+            emptyPlaceholder.style.display = "none";
+        }
+    }
+
+    currentPage = 1;
+    applyPagination();
+}
+
+function applyPagination() {
+    const articles = Array.from(document.querySelectorAll("#discussion-questions-list article"));
+    const matching = articles.filter(art => art.dataset.filterMatch !== "false");
+    const totalPages = Math.max(1, Math.ceil(matching.length / POSTS_PER_PAGE));
+    
+    if (currentPage > totalPages) currentPage = totalPages;
+    if (currentPage < 1) currentPage = 1;
+    
+    articles.forEach(art => art.style.display = "none");
+    
+    const start = (currentPage - 1) * POSTS_PER_PAGE;
+    const end = start + POSTS_PER_PAGE;
+    matching.slice(start, end).forEach(art => art.style.display = "block");
+    
+    const pagContainer = document.querySelector("main div.flex.justify-center.items-center.gap-md.mt-xl");
+    if (pagContainer) {
+        if (matching.length === 0) {
+            pagContainer.style.display = "none";
+        } else {
+            pagContainer.style.display = "flex";
+            let html = `
+                <button onclick="changePage(${currentPage - 1})" class="w-8 h-8 flex items-center justify-center rounded-full text-secondary hover:bg-surface-container disabled:opacity-50" ${currentPage === 1 ? 'disabled' : ''}>
+                    <span class="material-symbols-outlined text-[20px]">chevron_left</span>
+                </button>
+            `;
+            
+            for (let i = 1; i <= totalPages; i++) {
+                if (i === currentPage) {
+                    html += `<button class="w-8 h-8 flex items-center justify-center rounded-full bg-primary text-on-primary font-label-md text-label-md shadow-sm font-bold">${i}</button>`;
+                } else {
+                    html += `<button onclick="changePage(${i})" class="w-8 h-8 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container font-label-md text-label-md">${i}</button>`;
+                }
+            }
+            
+            html += `
+                <button onclick="changePage(${currentPage + 1})" class="w-8 h-8 flex items-center justify-center rounded-full text-secondary hover:bg-surface-container disabled:opacity-50" ${currentPage === totalPages ? 'disabled' : ''}>
+                    <span class="material-symbols-outlined text-[20px]">chevron_right</span>
+                </button>
+            `;
+            
+            pagContainer.innerHTML = html;
+        }
+    }
+}
+
+function changePage(p) {
+    currentPage = p;
+    applyPagination();
+    const mainTitle = document.querySelector("h1");
+    if (mainTitle) {
+        mainTitle.scrollIntoView({ behavior: 'smooth' });
+    }
+}
+
+function renderTagFilterNotice(tagName) {
+    let notice = document.getElementById("tag-filter-notice");
+    if (!notice) {
+        const filterBar = document.querySelector(".flex.flex-wrap.items-center.gap-sm.mb-lg");
+        if (filterBar) {
+            notice = document.createElement("div");
+            notice.id = "tag-filter-notice";
+            notice.className = "mb-md bg-primary/10 border border-primary/20 text-primary px-4 py-2.5 rounded-lg flex items-center justify-between font-label-md text-label-md w-full";
+            filterBar.parentNode.insertBefore(notice, filterBar.nextSibling);
+        }
+    }
+    if (notice) {
+        notice.innerHTML = `
+            <div class="flex items-center gap-1 text-[13px]" id="tag-filter-notice-text">
+                <span class="material-symbols-outlined text-[16px] text-primary" style="vertical-align: middle;">local_offer</span>
+                <span>正在篩選標籤: <strong class="text-primary font-bold">#${tagName}</strong></span>
+            </div>
+            <button onclick="clearTagFilter()" class="text-secondary hover:text-primary hover:underline font-bold text-xs flex items-center gap-0.5">清除篩選 <span class="material-symbols-outlined text-sm">close</span></button>
+        `;
+    }
+}
+
+function clearTagFilter() {
+    window.location.href = "code.html";
+}
+</script>
+
+<script id="global-coin-live-sync">
+(function () {
+  function readPet() {
+    let pet;
+    try { pet = JSON.parse(localStorage.getItem("studypet_pet") || "{}"); } catch (e) { pet = {}; }
+    if (typeof pet.coins !== "number") pet.coins = Number(pet.coins || 120);
+    if (!pet.hp) pet.hp = 500;
+    if (!pet.maxHp) pet.maxHp = 500;
+    localStorage.setItem("studypet_pet", JSON.stringify(pet));
+    return pet;
+  }
+
+  function syncCoins() {
+    const pet = readPet();
+    const coins = Number(pet.coins) || 0;
+
+    document.querySelectorAll(".global-coin-display, [data-coin-balance]").forEach(el => {
+      el.textContent = coins;
+    });
+
+    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+      acceptNode(node) {
+        const parent = node.parentElement;
+        if (!parent || ["SCRIPT", "STYLE", "TEXTAREA", "INPUT", "OPTION"].includes(parent.tagName)) return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+
+    let node;
+    while ((node = walker.nextNode())) {
+      const text = node.nodeValue;
+      if (/金幣\s*[:：]\s*\d+/.test(text)) {
+        node.nodeValue = text.replace(/(金幣\s*[:：]\s*)\d+/, `$1${coins}`);
+      } else if (/餘額\s*[:：]\s*\d+\s*枚?金幣/.test(text)) {
+        node.nodeValue = text.replace(/(餘額\s*[:：]\s*)\d+(\s*枚?金幣)/, `$1${coins}$2`);
+      } else if (/Coins\s*[:：]\s*\d+/i.test(text)) {
+        node.nodeValue = text.replace(/(Coins\s*[:：]\s*)\d+/i, `$1${coins}`);
+      }
+    }
+
+    // 個人檔案統計卡：總金幣 / Coins
+    document.querySelectorAll(".bg-surface.rounded-lg.p-md, .bg-surface-container-lowest, .bg-surface-container-high, .rounded-lg").forEach(card => {
+      const label = Array.from(card.querySelectorAll("span,p,div")).find(el => /總金幣|目前金幣|Coins/.test(el.textContent || ""));
+      if (!label) return;
+      const candidates = Array.from(card.querySelectorAll(".text-on-surface, .text-primary, .font-bold, span, p")).filter(el => /^\d+$/.test((el.textContent || "").trim()));
+      if (candidates[0]) candidates[0].textContent = coins;
+    });
+  }
+
+  const originalSetItem = localStorage.setItem;
+  localStorage.setItem = function (key, value) {
+    originalSetItem.apply(this, arguments);
+    if (key === "studypet_pet") setTimeout(syncCoins, 0);
+  };
+
+  window.syncPetScholarCoins = syncCoins;
+  document.addEventListener("DOMContentLoaded", syncCoins);
+  window.addEventListener("pageshow", syncCoins);
+  window.addEventListener("storage", e => { if (e.key === "studypet_pet") syncCoins(); });
+})();
+</script>
+
+
+<script id="render-custom-discussion-posts">
+(function () {
+  function safeText(value) {
+    return String(value == null ? "" : value).replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[ch]));
+  }
+
+  function getBoardName(boardId, fallback) {
+    const map = {
+      ceecs: "⚡ 電資學院", cmee: "⚙️ 機電學院", coe: "🏗️ 工程學院",
+      com: "📈 管理學院", cod: "🎨 設計學院", chss: "🏛️ 人文與社會科學學院"
+    };
+    return map[boardId] || fallback || "學術看板";
+  }
+
+  function loadPostsFromBothSources() {
+    const result = [];
+    const seen = new Set();
+
+    try {
+      const customPosts = JSON.parse(localStorage.getItem("studypet_custom_posts") || "[]");
+      customPosts.forEach((p, index) => {
+        const id = p.id || `custom-${index}`;
+        if (seen.has(id)) return;
+        seen.add(id);
+        result.push({
+          id,
+          detailId: index,
+          boardId: p.boardId || "unknown",
+          boardName: p.boardName || getBoardName(p.boardId),
+          deptName: p.deptName || "未指定科系",
+          title: p.title || "未命名問題",
+          content: p.content || "",
+          bounty: p.bounty || 10,
+          solved: !!p.solved,
+          timestamp: p.timestamp || "剛剛",
+          authorName: p.authorName || p.author || "新同學",
+          image: p.image || null
+        });
+      });
+    } catch (e) {}
+
+    // 也讀主頁 studypet_boards 中使用者新增的 post-*，避免主頁發文後討論版讀不到
+    try {
+      const boards = JSON.parse(localStorage.getItem("studypet_boards") || "{}");
+      Object.keys(boards).forEach(boardId => {
+        const board = boards[boardId];
+        (board.posts || []).forEach(p => {
+          if (!p.id || !String(p.id).startsWith("post-") || seen.has(p.id)) return;
+          seen.add(p.id);
+          result.push({
+            id: p.id,
+            detailId: null,
+            boardId,
+            boardName: getBoardName(boardId, board.name),
+            deptName: p.department || "未指定科系",
+            title: p.title || "未命名問題",
+            content: p.content || "",
+            bounty: p.bounty || 10,
+            solved: !!p.solved,
+            timestamp: p.timestamp || "剛剛",
+            authorName: p.author || "新同學",
+            image: p.image || null
+          });
+        });
+      });
+    } catch (e) {}
+
+    return result;
+  }
+
+  function renderCustomPosts() {
+    const container = document.getElementById("discussion-questions-list");
+    if (!container) return;
+
+    container.querySelectorAll("article").forEach(el => el.remove());
+    const posts = loadPostsFromBothSources();
+
+    posts.forEach((post, index) => {
+      const article = document.createElement("article");
+      article.dataset.customPost = "true";
+      article.dataset.boardId = post.boardId || "unknown";
+      article.dataset.filterMatch = "true";
+      article.className = "bg-surface-container-lowest border border-surface-variant rounded-lg p-lg shadow-sm hover:shadow-md transition-shadow cursor-pointer relative group";
+      article.onclick = () => {
+        const customIndex = post.detailId;
+        if (customIndex !== null && customIndex !== undefined) window.location.href = "../_12/code.html?id=" + encodeURIComponent(customIndex);
+      };
+      article.innerHTML = `
+<div class="flex flex-col sm:flex-row gap-md">
+  <div class="flex sm:flex-col items-center sm:items-end justify-start sm:w-24 gap-sm sm:gap-xs text-secondary shrink-0 order-2 sm:order-1 mt-md sm:mt-0 pt-md sm:pt-0 border-t sm:border-t-0 border-surface-variant">
+    <div class="flex items-center gap-xs"><span class="font-body-md text-body-md">0</span><span class="text-label-md font-label-md">回覆</span></div>
+    <div class="flex items-center gap-xs"><span class="font-body-md text-body-md">1</span><span class="text-label-md font-label-md">瀏覽</span></div>
+    <div class="flex items-center gap-xs bg-tertiary-container text-on-tertiary-container px-sm py-[2px] rounded-sm mt-xs"><span class="material-symbols-outlined text-[14px]">generating_tokens</span><span class="font-label-md text-label-md">${safeText(post.bounty)}</span></div>
+  </div>
+  <div class="flex-1 order-1 sm:order-2">
+    <div class="flex items-center gap-sm mb-sm text-secondary font-label-md text-label-md">
+      <div class="w-6 h-6 rounded-full bg-secondary-container flex items-center justify-center"><span class="material-symbols-outlined text-on-secondary-container text-[14px]">person</span></div>
+      <span class="text-on-surface-variant">${safeText(post.authorName)}</span><span>•</span><span>${safeText(post.timestamp)}</span>${post.solved ? '<span class="px-xs py-[2px] bg-primary-container text-on-primary-container rounded-sm text-[11px]">已解決</span>' : ''}
+    </div>
+    <h2 class="font-headline-md text-headline-md text-primary mb-xs group-hover:text-surface-tint transition-colors text-[20px]">${safeText(post.title)}</h2>
+    <p class="text-on-surface-variant font-body-md text-body-md line-clamp-2 mb-md">${safeText(post.content)}</p>
+    ${post.image ? `<img class="custom-post-thumb max-h-28 rounded-lg border border-outline-variant mb-md object-contain bg-white" src="${post.image}" alt="提問附圖"/>` : ""}
+    <div class="flex flex-wrap gap-xs">
+      <span class="px-sm py-[2px] bg-secondary-container text-on-secondary-container rounded-sm font-label-md text-label-md text-[11px]">#${safeText(post.boardName)}</span>
+      <span class="px-sm py-[2px] bg-secondary-container text-on-secondary-container rounded-sm font-label-md text-label-md text-[11px]">#${safeText(post.deptName)}</span>
+      <span class="px-sm py-[2px] bg-secondary-container text-on-secondary-container rounded-sm font-label-md text-label-md text-[11px]">#Bounty${safeText(post.bounty)}</span>
+    </div>
+  </div>
+</div>`;
+      container.insertBefore(article, container.firstChild);
+    });
+
+    const empty = document.getElementById("empty-state-placeholder");
+    if (empty && posts.length > 0) empty.style.display = "none";
+    if (typeof applyAllFilters === "function") applyAllFilters();
+  }
+
+  document.addEventListener("DOMContentLoaded", () => setTimeout(renderCustomPosts, 0));
+  window.addEventListener("pageshow", renderCustomPosts);
+})();
+</script>
+
+
+<script id="petscholar-nav-cleanup">
+document.addEventListener("DOMContentLoaded", () => {
+  const applyNavCleanup = () => {
+    document.querySelectorAll('a').forEach(a => {
+      if ((a.textContent || '').trim().includes('資料結構')) {
+        const li = a.closest('li');
+        if (li) li.remove();
+        else a.remove();
+      }
+    });
+  };
+  applyNavCleanup();
+  setTimeout(applyNavCleanup, 80);
+  setTimeout(applyNavCleanup, 300);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,1358 @@
+﻿<!DOCTYPE html>
+<html class="light" lang="zh-TW">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>北科遊戲化學業交流區 🎓 | 課堂展示 Demo Portal</title>
+  
+  <!-- Google Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  
+  <!-- Custom Animations stylesheet -->
+  <link rel="stylesheet" href="style.css"/>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  
+  <!-- Tailwind Configuration matching Stitch's Slate & Sand -->
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "outline-variant": "#c3c7cc",
+            "on-tertiary-fixed-variant": "#5c4127",
+            "on-secondary-fixed-variant": "#40484f",
+            "inverse-on-surface": "#f2f0f1",
+            "tertiary-container": "#e1bb98",
+            "primary-container": "#aec5d9",
+            "on-tertiary-fixed": "#2b1702",
+            "surface-bright": "#faf9fa",
+            "on-secondary-container": "#5d656d",
+            "on-surface": "#1b1c1d",
+            "tertiary-fixed-dim": "#e6bf9c",
+            "on-tertiary": "#ffffff",
+            "secondary-container": "#dbe3ec",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary-container": "#654a2e",
+            "outline": "#73777c",
+            "surface-container-low": "#f5f3f4",
+            "on-surface-variant": "#43474c",
+            "on-background": "#1b1c1d",
+            "secondary": "#575f67",
+            "primary-fixed-dim": "#b2c9dd",
+            "on-primary-fixed-variant": "#33495a",
+            "inverse-primary": "#b2c9dd",
+            "surface-container-high": "#e9e8e9",
+            "surface-dim": "#dbdada",
+            "on-primary-fixed": "#051e2c",
+            "tertiary": "#76593c",
+            "surface-container": "#efedee",
+            "on-primary-container": "#3c5263",
+            "surface-tint": "#4b6172",
+            "background": "#faf9fa",
+            "error-container": "#ffdad6",
+            "secondary-fixed-dim": "#bfc7d0",
+            "on-secondary": "#ffffff",
+            "on-primary": "#ffffff",
+            "tertiary-fixed": "#ffdcbe",
+            "error": "#ba1a1a",
+            "surface": "#faf9fa",
+            "inverse-surface": "#303031",
+            "surface-container-highest": "#e3e2e3",
+            "primary-fixed": "#cee5fa",
+            "primary": "#4b6172",
+            "on-error": "#ffffff",
+            "secondary-fixed": "#dbe3ec",
+            "on-error-container": "#93000a",
+            "surface-variant": "#e3e2e3",
+            "on-secondary-fixed": "#151c23"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.5rem",
+            "lg": "1rem",
+            "xl": "1.5rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "gutter": "16px",
+            "md": "16px",
+            "xl": "32px",
+            "margin-mobile": "16px",
+            "margin-desktop": "32px",
+            "xs": "4px",
+            "lg": "24px",
+            "sm": "8px",
+            "base": "8px"
+          },
+          "fontFamily": {
+            "sans": ["Inter", "Noto Sans TC", "sans-serif"]
+          }
+        }
+      }
+    }
+  </script>
+  
+  <style>
+    /* Custom CSS Overrides */
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      vertical-align: middle;
+    }
+    .icon-fill {
+      font-variation-settings: 'FILL' 1;
+    }
+  </style>
+
+<style id="petscholar-nav-fix">
+  .top-nav-fixed { gap: 3em !important; }
+  .top-nav-fixed a { white-space: nowrap; border-bottom: 2px solid transparent; padding-bottom: 0.25rem; }
+  .top-nav-fixed a.font-bold { border-bottom-color: currentColor; }
+  .petscholar-brand-link { text-decoration: none; cursor: pointer; }
+</style>
+</head>
+<body class="bg-background text-on-background min-h-screen transition-colors duration-300">
+
+  <!-- TOP NAVIGATION BAR -->
+  <nav class="fixed top-0 w-full z-50 flex items-center justify-between px-margin-desktop h-16 bg-surface dark:bg-inverse-surface border-b border-outline-variant/30 shadow-sm transition-colors">
+    <div class="flex items-center flex-1 justify-between pr-xl">
+      <!-- Brand Logo -->
+      <span class="font-bold text-headline-md text-primary dark:text-primary-fixed tracking-tight cursor-pointer" onclick="returnToHomeDemo()">PetScholar</span>
+      
+      <!-- Top Tabs (Desktop) -->
+      <div class="hidden xl:flex items-center gap-[3em] ml-auto mr-xl h-16 top-nav-fixed">
+        <a class="tab-link px-sm h-full flex items-center text-body-md font-medium text-secondary hover:text-primary border-b-2 border-transparent transition-all" href="stitch_studypet_village 2/_2/code.html" id="top-tab-boards">看板</a>
+        <a class="tab-link px-sm h-full flex items-center text-body-md font-medium text-secondary hover:text-primary border-b-2 border-transparent transition-all" href="stitch_studypet_village 2/_3/code.html" id="top-tab-radar">自習室</a>
+        <a class="tab-link px-sm h-full flex items-center text-body-md font-medium text-secondary hover:text-primary border-b-2 border-transparent transition-all" href="stitch_studypet_village 2/_5/code.html" id="top-tab-discussion">討論版</a>
+        <a class="tab-link px-sm h-full flex items-center text-body-md font-medium text-secondary hover:text-primary border-b-2 border-transparent transition-all" href="stitch_studypet_village 2/_6/code.html" id="top-tab-feeding">寵物餵食</a>
+        <a class="tab-link px-sm h-full flex items-center text-body-md font-medium text-secondary hover:text-primary border-b-2 border-transparent transition-all" href="stitch_studypet_village 2/_7/code.html" id="top-tab-shop">寵物商城</a>
+        <a class="tab-link px-sm h-full flex items-center text-body-md font-medium text-secondary hover:text-primary border-b-2 border-transparent transition-all" href="stitch_studypet_village 2/_8/code.html" id="top-tab-welfare">排行榜與成就</a>
+        <a class="tab-link px-sm h-full flex items-center text-body-md font-medium text-secondary hover:text-primary border-b-2 border-transparent transition-all" href="stitch_studypet_village 2/_9/code.html" id="top-tab-profile">個人檔案</a>
+        <!-- Role specific tabs (initially hidden) -->
+        <a class="tab-link px-sm h-full flex items-center text-body-md font-medium text-purple-600 dark:text-purple-400 hover:text-primary border-b-2 border-transparent transition-all" href="stitch_studypet_village 2/_14/code.html" id="top-tab-professor" style="display:none;">課程管理</a>
+        <a class="tab-link px-sm h-full flex items-center text-body-md font-medium text-red-600 dark:text-red-400 hover:text-primary border-b-2 border-transparent transition-all" href="javascript:void(0)" onclick="switchMainTab('admin')" id="top-tab-admin" style="display:none;">系統管理後台</a>
+      </div>
+    </div>
+    
+    <!-- Controls section -->
+    <div class="flex items-center gap-md">
+      <!-- Mode Toggle -->
+      <button class="p-2 rounded-full hover:bg-surface-container transition-colors" onclick="toggleDarkMode()" title="切換深淺模式">
+        <span class="material-symbols-outlined" id="dark-mode-icon">dark_mode</span>
+      </button>
+
+
+
+      <!-- Presenter Guided Tour Button -->
+      <button id="guide-tour-btn" class="bg-primary text-on-primary hover:bg-surface-tint font-bold text-label-md px-4 py-2 rounded-full flex items-center justify-center gap-1 shadow-sm transition-all whitespace-nowrap shrink-0" onclick="startGuidedTour()">
+        <span class="material-symbols-outlined text-[16px]">explore</span>
+        <span class="guide-full-text">3分鐘簡報導覽</span>
+        <span class="guide-short-text">簡報導覽</span>
+      </button>
+      
+      <!-- Presenter Role Switcher -->
+      <div class="flex items-center gap-1.5 bg-surface-container-low dark:bg-surface-container px-3 py-1.5 rounded-full border border-outline-variant/30 text-xs">
+        <span class="font-bold text-secondary text-[11px]">🎭 身分:</span>
+        <select id="header-role-select" onchange="handleHeaderRoleChange(this.value)" class="bg-transparent border-none p-0 focus:ring-0 text-primary dark:text-primary-fixed-dim font-bold cursor-pointer outline-none text-[11.5px]">
+          <option value="student">一般學生</option>
+          <option value="ta">課程助教</option>
+          <option value="professor">課程教授</option>
+          <option value="admin">系統管理員</option>
+        </select>
+      </div>
+
+      <!-- Login button -->
+      <a href="stitch_studypet_village%202/_1/code.html" style="text-decoration:none;" class="bg-primary text-on-primary hover:bg-surface-tint font-label-md text-label-md px-4 py-2 rounded-full transition-all flex items-center gap-1 whitespace-nowrap">
+        <span class="material-symbols-outlined text-[18px]">login</span>
+        <span>登入</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- WORKSPACE CONTAINER -->
+  <div class="flex flex-col xl:flex-row relative max-w-7xl mx-auto w-full pt-20 pb-16 px-4 md:px-8 gap-lg">
+    
+    <!-- MAIN CONTENT PANE (Left/Center) -->
+    <main class="flex-1 min-h-[calc(100vh-144px)] transition-all animate-fade-in-up">
+      
+      <!-- TAB 1: BOARDS -->
+      <section class="tab-section active" id="sect-boards">
+        <div class="mb-lg">
+          <h1 class="font-semibold text-headline-lg text-on-background">看板</h1>
+          <p class="text-secondary text-body-md">探索各學院與科系的專業課業討論。</p>
+        </div>
+        
+        <!-- Trending hashtags -->
+        <div class="mb-lg bg-surface-container-low dark:bg-surface-container p-md rounded-xl border border-outline-variant/20">
+          <h3 class="font-bold text-body-md text-secondary mb-2 flex items-center gap-1">
+            <span class="material-symbols-outlined text-sm">trending_up</span> 熱門標籤
+          </h3>
+          <div class="flex flex-wrap gap-2" id="hot-tags-list">
+            <!-- Dynamic tags -->
+          </div>
+        </div>
+
+        <!-- Department Bento Cards Grid -->
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-md mb-lg" id="dept-grid">
+          <!-- Rendered dynamically -->
+        </div>
+
+        <!-- Filter & Actions Header -->
+        <div class="flex items-center justify-between mb-md border-b border-outline-variant/30 pb-3">
+          <div class="flex items-center gap-2">
+            <h2 class="font-bold text-headline-md text-on-surface" id="board-title">所有熱門提問</h2>
+            <span class="bg-surface-container-high dark:bg-surface-variant text-on-surface-variant px-2.5 py-0.5 rounded-full text-xs font-semibold" id="board-count">0 篇貼文</span>
+          </div>
+          <button class="bg-primary text-on-primary hover:bg-surface-tint font-bold text-body-md px-4 py-2 rounded-lg flex items-center gap-1 shadow-sm transition-all" onclick="openAskModal()">
+            <span class="material-symbols-outlined text-[18px]">add_circle</span> 發佈新提問
+          </button>
+        </div>
+
+        <!-- Department Filter Chips -->
+        <div class="flex flex-wrap gap-sm mb-md" id="dept-filter-chips-container" style="display: none;">
+          <!-- Rendered dynamically -->
+        </div>
+
+        <!-- Question Cards List -->
+        <div class="space-y-md" id="posts-list-container">
+          <!-- Rendered dynamically -->
+        </div>
+      </section>
+
+      <!-- TAB 1.5: POST DETAIL (Subview) -->
+      <section class="tab-section hidden" id="sect-post-detail">
+        <div class="flex justify-between items-center mb-md">
+          <button class="text-secondary hover:text-primary font-bold text-body-md flex items-center gap-1 py-1.5 px-3 rounded-lg bg-surface-container-low border border-outline-variant/30 transition-all" onclick="backToBoards()">
+            <span class="material-symbols-outlined text-[18px]">arrow_back</span> 返回看板列表
+          </button>
+          
+          <div class="bg-tertiary-container text-on-tertiary-container px-4 py-1.5 rounded-full font-bold text-body-md flex items-center gap-1 shadow-sm">
+            <span class="material-symbols-outlined text-[18px] text-tertiary icon-fill">monetization_on</span>
+            <span>懸賞金幣:</span>
+            <strong id="detail-bounty">0</strong>
+          </div>
+        </div>
+
+        <!-- Main post card -->
+        <div class="bg-surface-container-lowest dark:bg-surface-container-high p-lg rounded-xl border border-outline-variant/30 shadow-sm mb-lg">
+          <div class="flex flex-wrap gap-2 items-center mb-sm">
+            <span class="text-xs font-bold px-2.5 py-0.5 rounded bg-primary-container text-on-primary-container" id="detail-dept">電機系</span>
+            <span class="text-xs font-bold px-2.5 py-0.5 rounded" id="detail-status">未解決</span>
+            <span class="text-secondary text-xs ml-auto" id="detail-time">2026-06-08</span>
+          </div>
+          <h2 class="font-bold text-headline-lg text-on-surface mb-md" id="detail-title">貼文標題</h2>
+          
+          <!-- Metadata author -->
+          <div class="flex items-center gap-sm mb-lg text-secondary text-xs pb-3 border-b border-outline-variant/20">
+            <span class="material-symbols-outlined text-[16px]">person</span>
+            <span>提問學生: <strong class="text-on-surface" id="detail-author">小明</strong></span>
+            
+            <div class="ml-auto flex items-center gap-3">
+              <button id="btn-delete-post" class="text-red-600 dark:text-red-400 font-medium hover:underline flex items-center gap-0.5 bg-red-100 dark:bg-red-950/40 px-2.5 py-1 rounded transition-all" onclick="deleteActivePost()" style="display: none;">
+                <span class="material-symbols-outlined text-[14px]">delete</span> 刪除此文 (扣 10 金幣)
+              </button>
+              
+              <button class="text-error font-medium hover:underline flex items-center gap-0.5" id="btn-report-post" onclick="triggerReportPost(event)">
+                <span class="material-symbols-outlined text-xs">flag</span> 檢舉此文
+              </button>
+            </div>
+          </div>
+
+          <div class="text-on-surface-variant text-body-lg leading-relaxed mb-lg" id="detail-content">
+            <!-- Content -->
+          </div>
+
+          <!-- Hand-drawn Annotation Canvas Preview -->
+          <div class="mt-md p-md bg-surface-container-low dark:bg-surface-container rounded-xl border border-outline-variant/20" id="detail-image-wrapper">
+            <p class="font-bold text-xs text-secondary mb-2 flex items-center gap-1">
+              <span class="material-symbols-outlined text-sm">attachment</span> 題目附圖
+            </p>
+            <div class="relative w-full max-w-[500px] border border-outline-variant/30 rounded-lg overflow-hidden shadow-inner">
+              <canvas id="detail-image-canvas" width="500" height="350" class="w-full h-auto bg-[#1e293b] block"></canvas>
+              <button id="btn-draw-annotation" class="absolute bottom-3 right-3 bg-red-600 hover:bg-red-700 text-white font-bold text-xs px-3 py-1.5 rounded-lg shadow flex items-center gap-1 transition-all" onclick="openCanvasModal()">
+                <span class="material-symbols-outlined text-[14px]">edit</span>
+                紅筆圈選標註解題圖
+              </button>
+            </div>
+          </div>
+          
+          <!-- Tags list -->
+          <div class="flex flex-wrap gap-sm mt-md" id="detail-tags-container">
+            <!-- tags -->
+          </div>
+        </div>
+
+        <!-- Answers tree header -->
+        <div class="flex items-center justify-between mb-md border-b border-outline-variant/30 pb-2">
+          <h3 class="font-bold text-headline-md text-on-surface flex items-center gap-1">
+            <span class="material-symbols-outlined text-primary">forum</span> 學霸解答與留言回覆
+          </h3>
+          <button class="bg-primary text-on-primary hover:bg-surface-tint font-bold text-body-md px-4 py-2 rounded-lg flex items-center gap-1 transition-all shadow-sm" id="btn-add-answer" onclick="openReplyModal()">
+            <span class="material-symbols-outlined text-[18px]">rate_review</span> 我來解答
+          </button>
+        </div>
+
+        <!-- Comment list (rendered as Tree recursively) -->
+        <div class="space-y-md" id="comment-tree-container">
+          <!-- Comments -->
+        </div>
+      </section>
+
+      <!-- TAB 2: RADAR (自習室) -->
+      <section class="tab-section hidden" id="sect-radar">
+        <div class="mb-lg">
+          <h1 class="font-semibold text-headline-lg text-on-background">自習室</h1>
+          <p class="text-secondary text-body-md">加入自習小組，與同儕一起進步、為寵物賺取經驗！</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-lg items-start">
+          <!-- Scanner Card -->
+          <div class="lg:col-span-5 bg-surface-container-lowest dark:bg-surface-container-high p-md rounded-xl border border-outline-variant/30 shadow-sm">
+            <h3 class="font-bold text-body-lg text-on-surface mb-md flex items-center gap-1">
+              <span class="material-symbols-outlined text-primary">radar</span> 一起讀書雷達
+            </h3>
+            
+            <div class="radar-scanner-container relative">
+              <div class="radar-circle circle-1"></div>
+              <div class="radar-circle circle-2"></div>
+              <div class="radar-circle circle-3"></div>
+              <div class="radar-sweep"></div>
+              <div class="radar-pins-container" id="radar-pins">
+                <!-- Dynamic pins -->
+              </div>
+              <div class="absolute inset-0 flex items-center justify-center font-bold text-xs text-primary dark:text-primary-fixed bg-surface-container/10 pointer-events-none text-center">
+                🏫<br>北科大
+              </div>
+            </div>
+
+            <button id="btn-scan-radar" class="w-full bg-primary text-on-primary hover:bg-surface-tint font-bold text-body-md py-2.5 rounded-lg mt-md shadow-sm transition-all flex items-center justify-center gap-1" onclick="startRadarScan()">
+              <span class="material-symbols-outlined">refresh</span> 重新掃描附近讀書夥伴
+            </button>
+          </div>
+
+          <!-- Active Study Rooms list -->
+          <div class="lg:col-span-7 bg-surface-container-lowest dark:bg-surface-container-high p-lg rounded-xl border border-outline-variant/30 shadow-sm flex flex-col">
+            <div class="flex justify-between items-center mb-md border-b border-outline-variant/20 pb-3">
+              <h3 class="font-bold text-body-lg text-on-surface flex items-center gap-1">
+                <span class="material-symbols-outlined text-primary">meeting_room</span> 活躍中的讀書小組
+              </h3>
+              <button class="bg-primary text-on-primary hover:bg-surface-tint font-bold text-xs px-3 py-1.5 rounded-lg flex items-center gap-0.5 transition-all shadow-sm" onclick="openCreateStudyModal()">
+                <span class="material-symbols-outlined text-xs">add</span> 發起邀約
+              </button>
+            </div>
+            
+            <div class="space-y-md" id="study-rooms-list">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 2.5: STUDY DETAIL (自習室詳情) -->
+      <section class="tab-section hidden" id="sect-study-detail">
+        <div class="flex justify-between items-start mb-md gap-4">
+          <div>
+            <h1 class="font-bold text-headline-lg text-on-background" id="study-detail-title">微積分衝刺營 (靜音)</h1>
+            <p class="text-secondary text-body-md mt-1 flex items-center gap-1" id="study-detail-status-text">
+              <span class="material-symbols-outlined text-sm">group</span> 4 人正在專注
+            </p>
+          </div>
+          <button class="bg-surface-container-high hover:bg-surface-container-highest text-error font-bold text-body-md px-5 py-2 rounded-lg border border-outline-variant/30 shadow-sm transition-all flex items-center gap-1" onclick="leaveStudyRoom()">
+            <span class="material-symbols-outlined">logout</span> 離開自習室
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-lg">
+          <!-- Left: User Webcam/Focus Wall -->
+          <div class="lg:col-span-3 bg-surface-container-lowest dark:bg-surface-container-high p-md rounded-xl border border-outline-variant/30 shadow-sm flex flex-col">
+            <h3 class="font-bold text-body-md text-on-surface mb-3 flex items-center gap-1">
+              <span class="material-symbols-outlined text-primary">grid_view</span> 專注夥伴
+            </h3>
+            <div class="grid grid-cols-2 gap-sm" id="study-participants-container">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+
+          <!-- Center: Pomodoro Timer Card -->
+          <div class="lg:col-span-6 bg-surface-container-lowest dark:bg-surface-container-high p-xl rounded-xl border border-outline-variant/30 shadow-sm flex flex-col items-center justify-center relative overflow-hidden">
+            <div class="absolute -top-24 -right-24 w-64 h-64 bg-primary-container/20 rounded-full blur-3xl opacity-40"></div>
+            <div class="absolute -bottom-24 -left-24 w-64 h-64 bg-tertiary-container/20 rounded-full blur-3xl opacity-40"></div>
+            
+            <div class="text-center z-10">
+              <h2 class="font-bold text-body-lg text-primary dark:text-primary-fixed mb-1">專注鐘 (Pomodoro)</h2>
+              <p class="text-secondary text-xs mb-6" id="pomo-status">第 1 個番茄鐘運作中</p>
+              
+              <div class="text-[72px] font-bold tracking-tight text-on-background leading-none mb-8" id="pomo-timer-display">25:00</div>
+              
+              <div class="flex gap-4 justify-center">
+                <button class="bg-primary text-on-primary hover:bg-surface-tint font-bold text-body-md px-6 py-2.5 rounded-lg shadow flex items-center gap-1 transition-all" id="btn-pomo-start" onclick="togglePomodoroTimer()">
+                  <span class="material-symbols-outlined" id="pomo-start-icon">play_arrow</span>
+                  <span id="pomo-start-text">開始</span>
+                </button>
+                <button class="bg-surface-container text-on-surface-variant font-bold text-body-md px-5 py-2.5 rounded-lg border border-outline-variant/30 hover:bg-surface-container-highest transition-all flex items-center gap-1" onclick="resetPomodoroTimer()">
+                  <span class="material-symbols-outlined">refresh</span> 重置
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Checklist & Live Chat -->
+          <div class="lg:col-span-3 flex flex-col gap-md h-full">
+            <!-- Goal Checklist -->
+            <div class="bg-surface-container-lowest dark:bg-surface-container-high p-md rounded-xl border border-outline-variant/30 shadow-sm flex flex-col min-h-[220px]">
+              <h3 class="font-bold text-body-md text-on-surface mb-2 flex items-center gap-1">
+                <span class="material-symbols-outlined text-tertiary">playlist_add_check</span> 今日小組目標
+              </h3>
+              
+              <div class="space-y-1.5 flex-grow overflow-y-auto max-h-[160px] pr-1 hide-scrollbar" id="study-goals-container">
+                <!-- Checkbox goals list -->
+              </div>
+              
+              <div class="mt-2.5 relative">
+                <input class="w-full bg-surface-container-low dark:bg-surface border border-outline-variant/40 rounded-lg py-1.5 pl-3 pr-8 text-xs focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all" id="new-study-goal-input" placeholder="新增目標..." type="text"/>
+                <button class="absolute right-2.5 top-1/2 -translate-y-1/2 text-primary hover:opacity-85" onclick="addStudyGoal()">
+                  <span class="material-symbols-outlined text-[18px]">add_circle</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Live Chat Room -->
+            <div class="bg-surface-container-lowest dark:bg-surface-container-high p-md rounded-xl border border-outline-variant/30 shadow-sm flex flex-col min-h-[280px]">
+              <h3 class="font-bold text-body-md text-on-surface mb-2 flex items-center gap-1">
+                <span class="material-symbols-outlined text-secondary">forum</span> 靜音文字讨论區
+              </h3>
+              <div class="flex-grow overflow-y-auto text-xs space-y-2 max-h-[200px] pr-1" id="study-chat-messages">
+                <!-- Messages -->
+              </div>
+              <div class="flex gap-1.5 mt-2">
+                <input class="flex-grow bg-surface-container-low dark:bg-surface border border-outline-variant/40 rounded-lg py-1.5 px-3 text-xs focus:ring-1 focus:ring-primary focus:border-primary outline-none" id="study-chat-input" placeholder="輕聲輸入..." type="text" onkeydown="if(event.key==='Enter') sendStudyChatMessage()"/>
+                <button class="bg-primary text-on-primary px-3 py-1.5 rounded-lg hover:bg-surface-tint transition-all" onclick="sendStudyChatMessage()">
+                  <span class="material-symbols-outlined text-[16px]">send</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 3: DISCUSSION (討論版) -->
+      <section class="tab-section hidden" id="sect-discussion">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-lg gap-md border-b border-outline-variant/30 pb-3">
+          <div>
+            <h1 class="font-semibold text-headline-lg text-on-background">學術討論區</h1>
+            <p class="text-secondary text-body-md">發表一般學科提問，自由分享與賺取金幣。</p>
+          </div>
+          <button class="bg-primary text-on-primary hover:bg-surface-tint font-bold text-body-md px-5 py-2.5 rounded-lg flex items-center gap-1 shadow-sm transition-all" onclick="openAskModal()">
+            <span class="material-symbols-outlined">edit_note</span> 發問與發帖
+          </button>
+        </div>
+
+        <!-- Filters -->
+        <div class="flex flex-wrap items-center gap-sm mb-md">
+          <button id="disc-status-all" class="px-3.5 py-1.5 rounded-full bg-primary text-on-primary shadow-sm font-semibold text-xs transition-all" onclick="filterDiscussionByStatus('all')">全部</button>
+          <button id="disc-status-unsolved" class="px-3.5 py-1.5 rounded-full bg-surface-container-low text-secondary border border-outline-variant/30 font-semibold text-xs hover:bg-surface-container transition-all" onclick="filterDiscussionByStatus('unsolved')">未解答</button>
+          <button id="disc-status-solved" class="px-3.5 py-1.5 rounded-full bg-surface-container-low text-secondary border border-outline-variant/30 font-semibold text-xs hover:bg-surface-container transition-all" onclick="filterDiscussionByStatus('solved')">已解決</button>
+          
+          <div class="ml-auto flex items-center gap-1 text-xs">
+            <span class="text-secondary">排序:</span>
+            <select class="bg-surface-container-low border border-outline-variant/30 text-on-surface text-xs rounded-lg py-1 px-2.5 cursor-pointer outline-none">
+              <option>最新發布</option>
+              <option>最高懸賞</option>
+              <option>最多回覆</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Question List (Tailwind styled mockup threads) -->
+        <div class="space-y-md" id="discussion-posts-list">
+          <!-- Will be rendered dynamically via script.js -->
+        </div>
+      </section>
+
+      <!-- TAB 4: PET FEEDING (寵物餵食) -->
+      <section class="tab-section hidden" id="sect-feeding">
+        <div class="mb-lg">
+          <h1 class="font-semibold text-headline-lg text-on-background">寵物餵食</h1>
+          <p class="text-secondary text-body-md">在這裡與您的電子雞夥伴「北科科」近距離互動，使用背包中的食物餵食牠以恢復 HP！</p>
+        </div>
+
+        <!-- Center Stage mascot display -->
+        <div class="bg-surface-container-lowest dark:bg-surface-container-high border border-outline-variant/30 rounded-2xl p-lg shadow-sm flex flex-col items-center justify-center min-h-[420px] relative mb-lg">
+          <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-20">
+            <div class="w-[280px] h-[280px] md:w-[420px] md:h-[420px] rounded-full bg-primary-fixed blur-3xl"></div>
+          </div>
+          
+          <div class="relative group cursor-pointer mb-md" onclick="triggerMascotJump()">
+            <!-- SVG Mascot scaled up for center stage -->
+            <div class="w-48 h-48 md:w-64 md:h-64 flex justify-center items-center">
+              <svg id="pet-svg-center" class="w-full h-full" viewBox="0 0 200 200">
+                <ellipse cx="100" cy="170" rx="45" ry="10" fill="rgba(0,0,0,0.25)" />
+                <g id="pet-body-group-center" class="anim-float">
+                  <!-- Injected dynamically -->
+                </g>
+              </svg>
+            </div>
+          </div>
+
+          <h2 class="font-bold text-headline-md text-on-surface text-center mb-1" id="feeding-pet-status-title">北科科</h2>
+          <p class="text-secondary text-body-md text-center max-w-md" id="feeding-pet-status-desc">肚子有點餓，快拿些美味的學霸大雞排或便當來餵我吧！🍔</p>
+        </div>
+
+        <!-- Food slider panel -->
+        <div class="bg-surface-container-lowest dark:bg-surface-container-high border border-outline-variant/30 rounded-2xl p-md shadow-sm">
+          <div class="flex justify-between items-center mb-sm">
+            <h3 class="font-bold text-body-lg text-on-surface">背包裡的美味食物</h3>
+            <button class="text-primary hover:underline text-xs flex items-center gap-0.5" onclick="switchMainTab('shop')">
+              前往商城選購 <span class="material-symbols-outlined text-xs">arrow_forward</span>
+            </button>
+          </div>
+          
+          <div class="flex overflow-x-auto gap-md pb-2 pt-2 hide-scrollbar snap-x px-1" id="feeding-food-tray">
+            <!-- Dynamic food tray elements -->
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 5: SHOP -->
+      <section class="tab-section hidden" id="sect-shop">
+        <div class="mb-lg">
+          <h1 class="font-semibold text-headline-lg text-on-background">電子雞養成商店</h1>
+          <p class="text-secondary text-body-md">消費賺得的金幣，購買營養補給品或限時精緻裝飾配件。</p>
+        </div>
+
+        <!-- Backpack Closet Panel -->
+        <div class="bg-surface-container-lowest dark:bg-surface-container-high p-md rounded-xl border border-outline-variant/30 shadow-sm mb-lg">
+          <h3 class="font-bold text-body-lg text-tertiary flex items-center gap-1 mb-md">
+            <span class="material-symbols-outlined">backpack</span> 電子雞裝飾配件背包
+          </h3>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-md" id="inventory-items-container">
+            <!-- Backpack items -->
+          </div>
+        </div>
+
+        <!-- Shop Grid -->
+        <div class="flex items-center gap-1.5 mb-md">
+          <span class="material-symbols-outlined text-primary">restaurant</span>
+          <h3 class="font-bold text-headline-md text-on-surface">商店美食補給品與裝飾</h3>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-md" id="full-shop-container">
+          <!-- Shop items grid -->
+        </div>
+      </section>
+
+      <!-- TAB 6: WELFARE (排行榜 & 成就) -->
+      <section class="tab-section hidden" id="sect-welfare">
+        <div class="mb-lg border-b border-outline-variant/30 pb-3">
+          <h1 class="font-semibold text-headline-lg text-on-background">排行榜與成就福利社</h1>
+          <p class="text-secondary text-body-md">解鎖成就徽章以在福利社兌換校園實體優惠折價券。</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-lg items-start">
+          <!-- Left: Achievements & Welfare Coupons -->
+          <div class="lg:col-span-7 space-y-lg">
+            <!-- Badge Showcase -->
+            <div class="bg-surface-container-lowest dark:bg-surface-container-high p-lg rounded-xl border border-outline-variant/30 shadow-sm">
+              <h3 class="font-bold text-body-lg text-on-surface mb-3 flex items-center gap-1">
+                <span class="material-symbols-outlined text-primary">military_tech</span> 我的成就徽章
+              </h3>
+              <div class="grid grid-cols-3 sm:grid-cols-4 gap-sm" id="badges-showcase">
+                <!-- Badges -->
+              </div>
+            </div>
+
+            <!-- Coupon Welfare Shop -->
+            <div class="bg-surface-container-lowest dark:bg-surface-container-high p-lg rounded-xl border border-outline-variant/30 shadow-sm">
+              <h3 class="font-bold text-body-lg text-tertiary flex items-center gap-1 mb-3">
+                <span class="material-symbols-outlined">local_activity</span> 學生特約福利社
+              </h3>
+              <div class="space-y-md" id="welfare-shop-list">
+                <!-- Coupons list -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Leaderboards -->
+          <div class="lg:col-span-5 bg-surface-container-lowest dark:bg-surface-container-high p-lg rounded-xl border border-outline-variant/30 shadow-sm">
+            <div class="flex border-b border-outline-variant/30 mb-md">
+              <button class="flex-1 py-2 font-bold text-body-md text-primary border-b-2 border-primary" onclick="switchLeaderboard('weekly')" id="lbtab-weekly">全校英雄榜</button>
+              <button class="flex-1 py-2 font-bold text-body-md text-secondary border-b-2 border-transparent hover:text-primary" onclick="switchLeaderboard('dept')" id="lbtab-dept">系所排行</button>
+            </div>
+            
+            <div class="space-y-md">
+              <div class="grid grid-cols-12 text-xs font-bold text-secondary pb-1 border-b border-outline-variant/20">
+                <span class="col-span-2">排名</span>
+                <span class="col-span-7">系所/姓名</span>
+                <span class="col-span-3 text-right">本週積分</span>
+              </div>
+              <div class="space-y-2.5" id="leaderboard-list-container">
+                <!-- Leaderboard lists -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 7: PROFILE -->
+      <section class="tab-section hidden" id="sect-profile">
+        <div class="mb-lg border-b border-outline-variant/30 pb-3">
+          <h1 class="font-semibold text-headline-lg text-on-background">個人檔案與電子雞設定</h1>
+          <p class="text-secondary text-body-md">管理您的校園學術身份，並變更電子雞外觀造型。</p>
+        </div>
+
+        <div class="max-w-xl bg-surface-container-lowest dark:bg-surface-container-high p-lg rounded-xl border border-outline-variant/30 shadow-sm mx-auto">
+          <div class="space-y-md">
+            <div>
+              <label class="block text-sm font-bold text-on-surface mb-1">我的暱稱</label>
+              <input class="w-full bg-surface-container-low dark:bg-surface border border-outline-variant rounded-lg py-2 px-3 focus:ring-2 focus:ring-primary focus:border-primary outline-none" id="profile-name" placeholder="請輸入姓名..." type="text"/>
+            </div>
+            
+            <div>
+              <label class="block text-sm font-bold text-on-surface mb-1">所屬學系</label>
+              <select id="profile-dept" class="w-full bg-surface-container-low dark:bg-surface border border-outline-variant rounded-lg py-2 px-3 outline-none">
+                <optgroup label="⚙️ 機電學院">
+                  <option value="機械工程系">機械工程系</option>
+                  <option value="車輛工程系">車輛工程系</option>
+                  <option value="能源與冷凍空調工程系">能源與冷凍空調工程系</option>
+                  <option value="機電學士班">機電學士班</option>
+                </optgroup>
+                <optgroup label="⚡ 電資學院">
+                  <option value="電機工程系">電機工程系</option>
+                  <option value="電子工程系">電子工程系</option>
+                  <option value="資訊工程系">資訊工程系</option>
+                  <option value="光電工程系">光電工程系</option>
+                  <option value="電資學士班">電資學士班</option>
+                </optgroup>
+                <optgroup label="🏗️ 工程學院">
+                  <option value="土木工程系">土木工程系</option>
+                  <option value="化學工程與生物科技系">化學工程與生物科技系</option>
+                  <option value="分子科學與工程系">分子科學與工程系</option>
+                  <option value="材料及資源工程系">材料及資源工程系</option>
+                  <option value="工程科技學士班">工程科技學士班</option>
+                </optgroup>
+                <optgroup label="📈 管理學院">
+                  <option value="工業工程與管理系">工業工程與管理系</option>
+                  <option value="經營管理系">經營管理系</option>
+                  <option value="資訊與財金管理系">資訊與財金管理系</option>
+                </optgroup>
+                <optgroup label="🎨 設計學院">
+                  <option value="建築系">建築系</option>
+                  <option value="工業設計系">工業設計系</option>
+                  <option value="互動設計系">互動設計系</option>
+                  <option value="創意設計學士班">創意設計學士班</option>
+                </optgroup>
+                <optgroup label="🏛️ 人文與社會科學學院">
+                  <option value="應用英文系">應用英文系</option>
+                  <option value="文化事業發展系">文化事業發展系</option>
+                </optgroup>
+              </select>
+            </div>
+            
+            <div>
+              <label class="block text-sm font-bold text-on-surface mb-1">簡報展示身份 (權限等級)</label>
+              <select id="profile-role" class="w-full bg-surface-container-low dark:bg-surface border border-outline-variant rounded-lg py-2 px-3 outline-none" onchange="document.getElementById('header-role-select').value = this.value; handleHeaderRoleChange(this.value)">
+                <option value="student">👤 一般學生 (Student)</option>
+                <option value="ta">⭐ 課程助教 (TA)</option>
+                <option value="professor">🎓 課程教授 (Professor)</option>
+                <option value="admin">🛡️ 系統管理員 (Admin)</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-sm font-bold text-on-surface mb-1">性別</label>
+              <select id="profile-gender" onchange="updateAvatarPreview()" class="w-full bg-surface-container-low dark:bg-surface border border-outline-variant rounded-lg py-2 px-3 outline-none">
+                <option value="female">🙋‍♀️ 女生</option>
+                <option value="male">🙋‍♂️ 男生</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-sm font-bold text-on-surface mb-1">頭像設定</label>
+              <div class="flex items-center gap-3 bg-surface-container-low dark:bg-surface rounded-lg border border-outline-variant p-3">
+                <img id="profile-avatar-preview" class="w-16 h-16 rounded-full object-cover border border-outline-variant bg-white" alt="頭像預覽" src=""/>
+                <div class="flex-1 space-y-2">
+                  <input id="profile-avatar-upload" type="file" accept="image/*" class="block w-full text-xs text-secondary" onchange="handleAvatarUpload(event)"/>
+                  <button type="button" class="text-xs px-3 py-1 rounded-full bg-surface text-secondary border border-outline-variant hover:bg-surface-container" onclick="clearCustomAvatar()">恢復預設頭像</button>
+                  <p class="text-[10px] text-secondary">可自行上傳圖片；若不選圖片，會依性別顯示預設頭像。</p>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-bold text-on-surface mb-2">變更寵物電子雞角色</label>
+              <div class="grid grid-cols-5 gap-sm">
+                <button class="flex flex-col items-center justify-center p-3 rounded-lg border border-outline-variant/40 hover:border-primary bg-surface-container-low" id="mcard-robot" onclick="selectMascotInModal('robot')">
+                  <span class="text-2xl">🤖</span>
+                  <span class="text-[10px] mt-1">機器人</span>
+                </button>
+                <button class="flex flex-col items-center justify-center p-3 rounded-lg border border-outline-variant/40 hover:border-primary" id="mcard-dog" onclick="selectMascotInModal('dog')">
+                  <span class="text-2xl">🐶</span>
+                  <span class="text-[10px] mt-1">柴柴狗</span>
+                </button>
+                <button class="flex flex-col items-center justify-center p-3 rounded-lg border border-outline-variant/40 hover:border-primary" id="mcard-cat" onclick="selectMascotInModal('cat')">
+                  <span class="text-2xl">🐱</span>
+                  <span class="text-[10px] mt-1">傲嬌貓</span>
+                </button>
+                <button class="flex flex-col items-center justify-center p-3 rounded-lg border border-outline-variant/40 hover:border-primary" id="mcard-pig" onclick="selectMascotInModal('pig')">
+                  <span class="text-2xl">🐷</span>
+                  <span class="text-[10px] mt-1">粉紅豬</span>
+                </button>
+                <button class="flex flex-col items-center justify-center p-3 rounded-lg border border-outline-variant/40 hover:border-primary" id="mcard-rabbit" onclick="selectMascotInModal('rabbit')">
+                  <span class="text-2xl">🐰</span>
+                  <span class="text-[10px] mt-1">雪球兔</span>
+                </button>
+                <button class="flex flex-col items-center justify-center p-3 rounded-lg border border-outline-variant/40 hover:border-primary" id="mcard-rat" onclick="selectMascotInModal('rat')">
+                  <span class="text-2xl">🐭</span>
+                  <span class="text-[10px] mt-1">棉花鼠</span>
+                </button>
+                <button class="flex flex-col items-center justify-center p-3 rounded-lg border border-outline-variant/40 hover:border-primary" id="mcard-ox" onclick="selectMascotInModal('ox')">
+                  <span class="text-2xl">🐮</span>
+                  <span class="text-[10px] mt-1">奶茶牛</span>
+                </button>
+                <button class="flex flex-col items-center justify-center p-3 rounded-lg border border-outline-variant/40 hover:border-primary" id="mcard-tiger" onclick="selectMascotInModal('tiger')">
+                  <span class="text-2xl">🐯</span>
+                  <span class="text-[10px] mt-1">小橘虎</span>
+                </button>
+                <button class="flex flex-col items-center justify-center p-3 rounded-lg border border-outline-variant/40 hover:border-primary" id="mcard-dragon" onclick="selectMascotInModal('dragon')">
+                  <span class="text-2xl">🐲</span>
+                  <span class="text-[10px] mt-1">薄荷龍</span>
+                </button>
+                <button class="flex flex-col items-center justify-center p-3 rounded-lg border border-outline-variant/40 hover:border-primary" id="mcard-snake" onclick="selectMascotInModal('snake')">
+                  <span class="text-2xl">🐍</span>
+                  <span class="text-[10px] mt-1">青青蛇</span>
+                </button>
+                <button class="flex flex-col items-center justify-center p-3 rounded-lg border border-outline-variant/40 hover:border-primary" id="mcard-horse" onclick="selectMascotInModal('horse')">
+                  <span class="text-2xl">🐴</span>
+                  <span class="text-[10px] mt-1">咖啡馬</span>
+                </button>
+                <button class="flex flex-col items-center justify-center p-3 rounded-lg border border-outline-variant/40 hover:border-primary" id="mcard-goat" onclick="selectMascotInModal('goat')">
+                  <span class="text-2xl">🐐</span>
+                  <span class="text-[10px] mt-1">小綿羊</span>
+                </button>
+                <button class="flex flex-col items-center justify-center p-3 rounded-lg border border-outline-variant/40 hover:border-primary" id="mcard-monkey" onclick="selectMascotInModal('monkey')">
+                  <span class="text-2xl">🐵</span>
+                  <span class="text-[10px] mt-1">開心猴</span>
+                </button>
+                <button class="flex flex-col items-center justify-center p-3 rounded-lg border border-outline-variant/40 hover:border-primary" id="mcard-rooster" onclick="selectMascotInModal('rooster')">
+                  <span class="text-2xl">🐔</span>
+                  <span class="text-[10px] mt-1">棉花雞</span>
+                </button>
+                <button class="flex flex-col items-center justify-center p-3 rounded-lg border border-outline-variant/40 hover:border-primary" id="mcard-panda" onclick="selectMascotInModal('panda')">
+                  <span class="text-2xl">🐼</span>
+                  <span class="text-[10px] mt-1">圓滾熊貓</span>
+                </button>
+              </div>
+              <input type="hidden" id="profile-mascot-type" value="robot"/>
+            </div>
+
+            <button class="w-full bg-primary text-on-primary hover:bg-surface-tint font-bold py-2.5 rounded-lg mt-md shadow-sm transition-all" onclick="saveProfileData()">
+              儲存個人檔案修改
+            </button>
+          </div>
+        </div>
+
+        <div class="max-w-3xl bg-surface-container-lowest dark:bg-surface-container-high p-lg rounded-xl border border-outline-variant/30 shadow-sm mx-auto mt-lg">
+          <div class="flex items-center justify-between border-b border-outline-variant/20 pb-3 mb-3">
+            <div>
+              <h2 class="font-bold text-headline-md text-on-surface flex items-center gap-1"><span class="material-symbols-outlined">history_edu</span> 提問紀錄</h2>
+              <p class="text-xs text-secondary">這裡會顯示你在看板與討論版發佈過的問題。</p>
+            </div>
+            <span id="profile-question-history-count" class="text-xs font-bold text-primary bg-primary/10 px-3 py-1 rounded-full">0 筆</span>
+          </div>
+          <div class="flex items-center justify-between text-[11px] text-secondary mb-2">
+            <span>超過 3 筆時可在下方區塊上下捲動查看全部。</span>
+            <span id="profile-question-history-page-hint">顯示全部</span>
+          </div>
+          <div id="profile-question-history-list" class="space-y-sm text-sm max-h-[430px] overflow-y-auto pr-2 scroll-smooth">
+            <div class="text-xs text-secondary text-center py-6">尚未載入提問紀錄</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 8: DATA STRUCTURE VISUALIZER -->
+      <section class="tab-section hidden" id="sect-visualizer">
+        <div class="mb-lg border-b border-outline-variant/30 pb-3">
+          <h1 class="font-semibold text-headline-lg text-on-background">資料結構在討論區的運用</h1>
+          <p class="text-secondary text-body-md">解析本專案如何使用 Object、Array 與 Tree 來建置留言與看板資料結構。</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-lg items-start">
+          <!-- Dynamic comments Tree diagram SVG -->
+          <div class="lg:col-span-7 bg-surface-container-lowest dark:bg-surface-container-high p-lg rounded-xl border border-outline-variant/30 shadow-sm">
+            <h3 class="font-bold text-body-lg text-on-surface mb-2 flex items-center gap-1">
+              <span class="material-symbols-outlined text-primary">account_tree</span> 巢狀留言樹狀結構圖 (Tree Node Diagram)
+            </h3>
+            <p class="text-secondary text-xs mb-md">視覺化遞迴深度優先遍歷（DFS）的留言父子關係節點。點擊左側留言以在此高亮。</p>
+            
+            <div class="tree-svg-container relative">
+              <svg id="comment-tree-svg" viewBox="0 0 500 380" class="w-full h-full">
+                <g id="svg-links"></g>
+                <g id="svg-nodes"></g>
+              </svg>
+            </div>
+            
+            <div class="grid grid-cols-2 sm:grid-cols-5 gap-sm mt-md text-[10px] text-secondary">
+              <div class="flex items-center"><span class="node-dot dot-root"></span><span>文章根節點</span></div>
+              <div class="flex items-center"><span class="node-dot dot-l1"></span><span>一級留言</span></div>
+              <div class="flex items-center"><span class="node-dot dot-l2"></span><span>巢狀回覆</span></div>
+              <div class="flex items-center"><span class="node-dot dot-adopted"></span><span>最佳解答</span></div>
+              <div class="flex items-center"><span class="node-dot dot-ta-verified"></span><span>助教正解</span></div>
+            </div>
+          </div>
+
+          <!-- Code viewer columns -->
+          <div class="lg:col-span-5 bg-surface-container-lowest dark:bg-surface-container-high p-lg rounded-xl border border-outline-variant/30 shadow-sm flex flex-col min-h-[440px]">
+            <div class="flex border-b border-outline-variant/30 mb-sm">
+              <button class="flex-1 py-1.5 font-bold text-xs text-primary border-b-2 border-primary" onclick="switchVisTab('code-tree')" id="vtab-tree">Tree 巢狀留言</button>
+              <button class="flex-1 py-1.5 font-bold text-xs text-secondary border-b-2 border-transparent hover:text-primary" onclick="switchVisTab('code-board')" id="vtab-board">Object 哈希看板</button>
+              <button class="flex-1 py-1.5 font-bold text-xs text-secondary border-b-2 border-transparent hover:text-primary" onclick="switchVisTab('code-pet')" id="vtab-pet">Object 寵物狀態</button>
+            </div>
+            
+            <div class="flex-grow flex flex-col">
+              <!-- Tree text explain -->
+              <div class="vis-tab-content active space-y-md flex-grow flex flex-col" id="vsect-tree">
+                <p class="text-xs text-on-surface-variant leading-relaxed">
+                  <strong>樹狀結構 (Tree)</strong> 用於儲存樹狀嵌套回覆。每個留言是一個物件節點，其 <code>replies</code> 陣列儲存子回覆物件。
+                </p>
+                <pre class="bg-gray-900 text-green-400 p-3 rounded-lg text-xs font-mono overflow-auto flex-grow max-h-[300px] shadow-inner" id="json-tree-viewer"></pre>
+              </div>
+              <!-- Board text explain -->
+              <div class="vis-tab-content hidden space-y-md flex-grow flex flex-col" id="vsect-board">
+                <p class="text-xs text-on-surface-variant leading-relaxed">
+                  <strong>物件 (Object)</strong> 看板以科系簡寫為鍵（Key）儲存。看板下的貼文列表使用 <strong>陣列 (Array)</strong> 儲存以供渲染與遍歷。
+                </p>
+                <pre class="bg-gray-900 text-green-400 p-3 rounded-lg text-xs font-mono overflow-auto flex-grow max-h-[300px] shadow-inner" id="json-board-viewer"></pre>
+              </div>
+              <!-- Pet text explain -->
+              <div class="vis-tab-content hidden space-y-md flex-grow flex flex-col" id="vsect-pet">
+                <p class="text-xs text-on-surface-variant leading-relaxed">
+                  <strong>哈希對照表物件 (Object)</strong> 記錄寵物的數值，金幣與餵食道具增減邏輯可對應 $O(1)$ 的查詢及計算。
+                </p>
+                <pre class="bg-gray-900 text-green-400 p-3 rounded-lg text-xs font-mono overflow-auto flex-grow max-h-[300px] shadow-inner" id="json-pet-viewer"></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 9: PROFESSOR DASHBOARD (課程管理) -->
+      <section class="tab-section hidden" id="sect-professor">
+        <div class="mb-lg border-b border-outline-variant/30 pb-3 bg-gradient-to-r from-purple-500/10 to-transparent p-md rounded-lg">
+          <h1 class="font-semibold text-headline-lg text-purple-700 dark:text-purple-400">🎓 課程教授管理主頁</h1>
+          <p class="text-secondary text-body-md">管理本學期核心課程 Hashtags 標籤，追蹤學生在解題遇到的常見盲點與難度。</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-lg">
+          <!-- Hashtag management -->
+          <div class="bg-surface-container-lowest dark:bg-surface-container-high p-lg rounded-xl border border-outline-variant/30 shadow-sm">
+            <h3 class="font-bold text-body-lg text-purple-700 dark:text-purple-400 mb-2 flex items-center gap-1">
+              <span class="material-symbols-outlined">local_offer</span> 課程專屬 Hashtags 管理
+            </h3>
+            <p class="text-secondary text-xs">新增或管理討論版專屬課程標籤，引導學生發問方向。</p>
+            
+            <div class="flex gap-2 mt-md">
+              <input class="flex-grow bg-surface-container-low dark:bg-surface border border-outline-variant/40 rounded-lg py-2 px-3 text-xs outline-none focus:ring-1 focus:ring-primary" id="new-hashtag-input" placeholder="例：#拉氏轉換..."/>
+              <button class="bg-primary text-on-primary hover:bg-surface-tint font-bold text-xs px-4 py-2 rounded-lg transition-all" onclick="addProfessorHashtag()">新增標籤</button>
+            </div>
+            
+            <div class="flex flex-wrap gap-2 mt-lg" id="professor-tags-list">
+              <!-- Tags list -->
+            </div>
+          </div>
+
+          <!-- Misconceptions & Charts -->
+          <div class="bg-surface-container-lowest dark:bg-surface-container-high p-lg rounded-xl border border-outline-variant/30 shadow-sm">
+            <h3 class="font-bold text-body-lg text-purple-700 dark:text-purple-400 mb-md flex items-center gap-1">
+              <span class="material-symbols-outlined">analytics</span> 學生學習難點統計分析
+            </h3>
+            
+            <!-- Custom stat bars -->
+            <div class="space-y-sm mb-lg">
+              <div>
+                <div class="flex justify-between text-xs font-semibold mb-1">
+                  <span>#微積分 (常微分方程/特解)</span>
+                  <span class="text-primary font-bold">75% (3/4 已解決)</span>
+                </div>
+                <div class="w-full bg-surface-container-low h-2.5 rounded-full overflow-hidden">
+                  <div class="bg-primary h-full rounded-full" style="width: 75%;"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between text-xs font-semibold mb-1">
+                  <span>#期權評價 (Black-Scholes 模型)</span>
+                  <span class="text-purple-500 font-bold">45% (0/1 已解決)</span>
+                </div>
+                <div class="w-full bg-surface-container-low h-2.5 rounded-full overflow-hidden">
+                  <div class="bg-purple-500 h-full rounded-full" style="width: 45%;"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between text-xs font-semibold mb-1">
+                  <span>#資料結構 (BST二元搜尋樹)</span>
+                  <span class="text-green-500 font-bold">60% (0/1 已解決)</span>
+                </div>
+                <div class="w-full bg-surface-container-low h-2.5 rounded-full overflow-hidden">
+                  <div class="bg-green-500 h-full rounded-full" style="width: 60%;"></div>
+                </div>
+              </div>
+            </div>
+
+            <h4 class="font-bold text-xs text-on-surface border-t border-outline-variant/20 pt-md mb-2 flex items-center gap-0.5">
+              <span class="material-symbols-outlined text-sm">lightbulb</span> 高頻觀念錯誤統計
+            </h4>
+            <div class="space-y-2 text-xs" id="professor-misconceptions">
+              <!-- Misconceptions dynamically rendered -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 10: SYSTEM ADMIN PANEL -->
+      <section class="tab-section hidden" id="sect-admin">
+        <div class="mb-lg border-b border-outline-variant/30 pb-3 bg-gradient-to-r from-red-500/10 via-orange-500/10 to-transparent p-md rounded-lg">
+          <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-md">
+            <div>
+              <h1 class="font-semibold text-headline-lg text-red-600 dark:text-red-400">🛡️ 系統管理員後台</h1>
+              <p class="text-secondary text-body-md">只有切換為「系統管理員」身分時才會顯示。可查看全站提問紀錄、上線狀態、刪除不恰當問題、封鎖帳號並分析近期提問方向。</p>
+            </div>
+            <span class="inline-flex items-center gap-1 bg-red-100 text-red-700 dark:bg-red-950/40 dark:text-red-300 px-3 py-1 rounded-full text-xs font-bold w-fit">
+              <span class="material-symbols-outlined text-[16px]">admin_panel_settings</span>
+              Admin Only
+            </span>
+          </div>
+        </div>
+
+        <div id="admin-unauthorized" class="hidden bg-surface-container-lowest dark:bg-surface-container-high p-xl rounded-xl border border-outline-variant/30 text-center">
+          <span class="material-symbols-outlined text-[56px] text-outline mb-3">lock</span>
+          <h2 class="font-bold text-headline-md text-on-surface mb-2">此頁面僅限系統管理員查看</h2>
+          <p class="text-secondary text-body-md">請先在右上角身分切換選擇「系統管理員」。</p>
+        </div>
+
+        <div id="admin-dashboard-content" class="space-y-lg">
+          <div class="bg-surface-container-lowest dark:bg-surface-container-high rounded-xl border border-outline-variant/30 shadow-sm p-sm overflow-x-auto">
+            <div class="flex gap-sm min-w-max">
+              <button id="admin-panel-tab-overview" class="admin-panel-tab px-md py-sm rounded-lg border text-xs font-bold transition-all" onclick="switchAdminPanel('overview')">總覽與上線</button>
+              <button id="admin-panel-tab-questions" class="admin-panel-tab px-md py-sm rounded-lg border text-xs font-bold transition-all" onclick="switchAdminPanel('questions')">全站提問紀錄</button>
+              <button id="admin-panel-tab-reports" class="admin-panel-tab px-md py-sm rounded-lg border text-xs font-bold transition-all" onclick="switchAdminPanel('reports')">檢舉案件與日誌</button>
+              <button id="admin-panel-tab-analytics" class="admin-panel-tab px-md py-sm rounded-lg border text-xs font-bold transition-all" onclick="switchAdminPanel('analytics')">提問方向洞悉</button>
+            </div>
+          </div>
+
+          <div id="admin-panel-overview" class="admin-subpanel space-y-lg">
+            <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-md" id="admin-stats-grid">
+              <!-- Admin stats rendered dynamically -->
+            </div>
+
+            <div class="bg-surface-container-lowest dark:bg-surface-container-high p-lg rounded-xl border border-outline-variant/30 shadow-sm">
+              <div class="flex items-center justify-between mb-md border-b border-outline-variant/20 pb-2">
+                <h3 class="font-bold text-body-lg text-on-surface flex items-center gap-1"><span class="material-symbols-outlined text-[20px]">groups</span> 上線人數與帳號狀態</h3>
+                <span class="bg-green-100 text-green-700 px-2 py-0.5 rounded-full text-xs font-bold" id="admin-online-count">0 人在線</span>
+              </div>
+              <div class="space-y-2 max-h-[520px] overflow-y-auto pr-1 hide-scrollbar" id="admin-online-users-list">
+                <!-- Online users rendered dynamically -->
+              </div>
+            </div>
+          </div>
+
+          <div id="admin-panel-questions" class="admin-subpanel hidden">
+            <div class="bg-surface-container-lowest dark:bg-surface-container-high p-lg rounded-xl border border-outline-variant/30 shadow-sm">
+              <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-sm mb-md border-b border-outline-variant/20 pb-2">
+                <div>
+                  <h3 class="font-bold text-body-lg text-on-surface flex items-center gap-1"><span class="material-symbols-outlined text-[20px]">history</span> 全站提問紀錄</h3>
+                  <p class="text-xs text-secondary">可直接刪除問題，或刪除後封鎖提問帳號；封鎖與屏蔽結果會與檢舉案件即時同步。</p>
+                </div>
+                <div class="flex items-center gap-sm">
+                  <select id="admin-question-filter" onchange="renderAdminSection()" class="bg-surface border border-outline-variant text-on-surface rounded-lg text-xs py-1.5 px-2 focus:ring-primary focus:border-primary">
+                    <option value="all">全部問題</option>
+                    <option value="unsolved">未解決</option>
+                    <option value="solved">已解決</option>
+                    <option value="blocked">封鎖帳號及問題</option>
+                  </select>
+                </div>
+              </div>
+              <div class="space-y-md max-h-[620px] overflow-y-auto pr-1 hide-scrollbar" id="admin-question-records-list">
+                <!-- All question records rendered dynamically -->
+              </div>
+            </div>
+          </div>
+
+          <div id="admin-panel-reports" class="admin-subpanel hidden">
+            <div class="bg-surface-container-lowest dark:bg-surface-container-high p-lg rounded-xl border border-outline-variant/30 shadow-sm flex flex-col min-h-[300px]">
+              <div class="flex justify-between items-center mb-md border-b border-outline-variant/20 pb-2">
+                <h3 class="font-bold text-body-lg text-red-600 dark:text-red-400 flex items-center gap-1"><span class="material-symbols-outlined text-[20px]">report</span> 檢舉案件與處理日誌</h3>
+                <span class="bg-red-100 text-red-700 px-2 py-0.5 rounded-full text-xs font-bold" id="admin-reports-count">0 案待理</span>
+              </div>
+              <div class="space-y-md max-h-[360px] overflow-y-auto pr-1 hide-scrollbar mb-md" id="admin-reports-list"></div>
+              <h4 class="font-bold text-xs text-on-surface mb-2 border-t border-outline-variant/20 pt-3">📋 操作歷史日誌</h4>
+              <div class="flex-grow space-y-2 text-xs overflow-y-auto max-h-[360px] pr-1 hide-scrollbar" id="admin-logs-list"></div>
+            </div>
+          </div>
+
+          <div id="admin-panel-analytics" class="admin-subpanel hidden">
+            <div class="bg-surface-container-lowest dark:bg-surface-container-high p-lg rounded-xl border border-outline-variant/30 shadow-sm">
+              <div class="flex justify-between items-center mb-md border-b border-outline-variant/20 pb-2">
+                <h3 class="font-bold text-body-lg text-purple-600 dark:text-purple-400 flex items-center gap-1"><span class="material-symbols-outlined text-[20px]">query_stats</span> 最近提問方向洞悉</h3>
+                <span class="bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full text-xs font-bold" id="admin-analysis-range">Recent</span>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+                <div>
+                  <h4 class="font-bold text-xs text-on-surface mb-2">熱門標籤</h4>
+                  <div class="space-y-2" id="admin-tag-analysis"></div>
+                </div>
+                <div>
+                  <h4 class="font-bold text-xs text-on-surface mb-2">學院分布</h4>
+                  <div class="space-y-2" id="admin-board-analysis"></div>
+                </div>
+              </div>
+              <div class="mt-md bg-primary/5 border border-primary/10 rounded-xl p-md">
+                <h4 class="font-bold text-xs text-primary mb-2 flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">lightbulb</span> 系統洞悉</h4>
+                <div class="space-y-1 text-xs text-secondary" id="admin-insights-list"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- RIGHT SIDEBAR (Desktop user status) -->
+    <aside class="w-full xl:w-64 flex flex-col gap-lg shrink-0">
+      
+      <!-- User Profile widget -->
+      <div class="bg-surface-container-lowest dark:bg-surface-container-high p-md rounded-2xl border border-outline-variant/30 shadow-sm flex items-center justify-between">
+        <div class="flex items-center gap-sm">
+          <div id="user-avatar-container" class="w-10 h-10 rounded-full overflow-hidden flex items-center justify-center bg-surface-container-low border border-outline-variant/20 shadow-inner">
+            <span class="text-2xl">👤</span>
+          </div>
+          <div>
+            <h4 class="font-bold text-body-md text-on-surface" id="user-name">載入中...</h4>
+            <p class="text-[10px] text-secondary truncate max-w-[120px]" id="user-dept">載入中...</p>
+          </div>
+        </div>
+        <button class="p-2 text-secondary hover:text-primary transition-colors" onclick="switchMainTab('profile')" title="編輯個人設定">
+          <span class="material-symbols-outlined text-[20px]">settings</span>
+        </button>
+      </div>
+
+      <!-- Electronic Pet mascot widget -->
+      <div class="bg-surface-container-lowest dark:bg-surface-container-high p-md rounded-2xl border border-outline-variant/30 shadow-sm flex flex-col items-center relative overflow-hidden" id="pet-widget-card">
+        
+        <!-- Speech bubbles -->
+        <div class="pet-speech absolute top-2 bg-primary-container text-on-primary-container text-[11px] font-medium p-2 rounded-xl border border-outline-variant/30 shadow-md max-w-[90%] z-20 text-center" id="pet-bubble" style="display:none;">
+          <p id="pet-speech-text">哈囉！我是北科科！</p>
+        </div>
+
+        <!-- SVG interactive mascot container -->
+        <div class="pet-mascot-container relative mt-4 mb-2">
+          <svg id="pet-svg" class="pet-mascot w-[120px] h-[120px]" viewBox="0 0 200 200">
+            <!-- Shadow base -->
+            <ellipse cx="100" cy="170" rx="45" ry="10" fill="rgba(0,0,0,0.25)"></ellipse>
+            <g id="pet-body-group" class="anim-float">
+              <!-- Dynamic mascot SVG path generated in script.js -->
+            </g>
+          </svg>
+        </div>
+
+        <!-- Mascot metadata -->
+        <div class="flex justify-between items-center w-full mb-3 px-1">
+          <span class="font-bold text-body-md text-on-surface" id="pet-name">北科科</span>
+          <span class="text-xs font-bold text-primary dark:text-primary-fixed-dim" id="pet-level">Lv.3</span>
+        </div>
+
+        <!-- Status bars list -->
+        <div class="w-full space-y-2 text-xs">
+          <!-- Hearts count -->
+          <div class="flex justify-between items-center">
+            <span class="text-secondary text-[11px]">❤️ 生命值 (Hearts)</span>
+            <span class="hearts-glow tracking-widest" id="pet-hearts-display">❤️❤️❤️🖤🖤</span>
+          </div>
+
+          <!-- HP Bar -->
+          <div>
+            <div class="flex justify-between text-[10px] text-secondary mb-0.5">
+              <span>🔋 活力值 (HP)</span>
+              <span id="pet-hp-text">60/100</span>
+            </div>
+            <div class="w-full bg-surface-container-low dark:bg-surface h-2 rounded-full overflow-hidden border border-outline-variant/10">
+              <div class="hp-bar h-full rounded-full" id="pet-hp-bar" style="width: 60%;"></div>
+            </div>
+          </div>
+
+          <!-- EXP Bar -->
+          <div>
+            <div class="flex justify-between text-[10px] text-secondary mb-0.5">
+              <span>⚡ 經驗值 (EXP)</span>
+              <span id="pet-exp-text">45/100</span>
+            </div>
+            <div class="w-full bg-surface-container-low dark:bg-surface h-2 rounded-full overflow-hidden border border-outline-variant/10">
+              <div class="exp-bar h-full rounded-full" id="pet-exp-bar" style="width: 45%;"></div>
+            </div>
+          </div>
+
+          <!-- Coins panel card -->
+          <div class="flex items-center justify-between bg-yellow-500/10 border border-yellow-500/20 rounded-xl p-2.5 mt-2" id="pet-coins-container">
+            <div class="flex items-center gap-1.5">
+              <span class="text-xl anim-spin-slow">🪙</span>
+              <div class="flex flex-col">
+                <span class="font-bold text-body-lg text-yellow-600 dark:text-yellow-400" id="pet-coins">30</span>
+                <span class="text-[9px] text-secondary">金幣餘額</span>
+              </div>
+            </div>
+            <!-- Daily Checkin -->
+            <button class="bg-yellow-500 hover:bg-yellow-600 text-yellow-950 font-bold text-[10.5px] px-2.5 py-1.5 rounded-lg shadow-sm transition-all" id="checkin-btn" onclick="triggerDailyCheckIn()">
+              每日簽到 (+5)
+            </button>
+          </div>
+
+          <!-- Simulate hour passing -->
+          <button class="w-full mt-2 bg-surface-container border border-outline-variant/30 hover:bg-surface-container-highest text-secondary hover:text-on-surface font-semibold text-[10.5px] py-1.5 rounded-lg shadow-sm transition-all flex items-center justify-center gap-1" onclick="simulateHourPass()">
+            <span>⏳</span> 模擬時間流逝 1 小時
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick Feed / Backpack Food panel widget -->
+      <div class="bg-surface-container-lowest dark:bg-surface-container-high p-md rounded-2xl border border-outline-variant/30 shadow-sm">
+        <h3 class="font-bold text-body-md text-on-surface mb-2 flex items-center gap-0.5 border-b border-outline-variant/20 pb-1.5">
+          <span>🍖</span> 快捷餵食
+        </h3>
+        <div class="space-y-1.5" id="quick-shop-container">
+          <!-- Dynamic quick inventory/food list -->
+        </div>
+      </div>
+
+    </aside>
+
+  </div>
+
+  <!-- REPLY MODAL (Simulation Q&A answers submit) -->
+  <div class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-300" id="reply-modal">
+    <div class="bg-surface-container-lowest dark:bg-surface-container-high rounded-2xl border border-outline-variant/30 shadow-xl max-w-lg w-full m-4 overflow-hidden transform scale-95 transition-transform duration-300">
+      <div class="flex items-center justify-between p-md bg-surface border-b border-outline-variant/30">
+        <h3 class="font-bold text-body-lg text-on-surface flex items-center gap-1">
+          <span>✍️</span> 新增你的解答回覆
+        </h3>
+        <button class="text-secondary hover:text-on-surface text-xl" onclick="closeReplyModal()">&times;</button>
+      </div>
+      <div class="p-md space-y-md">
+        <input id="reply-parent-id" type="hidden" value=""/>
+        <div>
+          <label class="block text-xs font-bold text-secondary mb-1">解答者暱稱:</label>
+          <input class="w-full bg-surface-container-low dark:bg-surface border border-outline-variant rounded-lg py-2 px-3 text-sm focus:ring-1 focus:ring-primary outline-none" id="reply-author" placeholder="例：電機三學長..." type="text"/>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-secondary mb-1">解答內容敘述:</label>
+          <textarea class="w-full bg-surface-container-low dark:bg-surface border border-outline-variant rounded-lg py-2 px-3 text-sm focus:ring-1 focus:ring-primary outline-none" id="reply-text" placeholder="請詳細寫出你的解題步驟或說明..." rows="5"></textarea>
+        </div>
+        
+        <!-- Hand-drawn annotation attachment indicator -->
+        <div class="hidden bg-green-500/10 border border-green-500/20 p-2.5 rounded-lg flex items-center gap-2" id="reply-attached-annotation-wrapper">
+          <span class="text-xl">🎨</span>
+          <div>
+            <p class="text-xs font-bold text-green-700 dark:text-green-400">已附加考題紙紅筆標註塗鴉！</p>
+            <img class="max-h-16 rounded border border-outline-variant/30 mt-1" id="reply-attached-annotation-preview" src=""/>
+          </div>
+        </div>
+        
+        <div class="hidden text-xs font-bold text-error" id="modal-warning">⚠️ 請完整填寫名字與解答內容！</div>
+      </div>
+      <div class="flex justify-end gap-sm p-md bg-surface-container-low border-t border-outline-variant/30">
+        <button class="px-4 py-2 border border-outline-variant text-secondary rounded-lg font-bold text-xs hover:bg-surface-container transition-all" onclick="closeReplyModal()">取消</button>
+        <button class="px-5 py-2 bg-primary text-on-primary rounded-lg font-bold text-xs hover:bg-surface-tint shadow transition-all" onclick="submitReply()">送出回答 (+15 EXP)</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ASK MODAL (Create new thread) -->
+  <div class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-300" id="ask-modal">
+    <div class="bg-surface-container-lowest dark:bg-surface-container-high rounded-2xl border border-outline-variant/30 shadow-xl max-w-xl w-full m-4 overflow-hidden transform scale-95 transition-transform duration-300">
+      <div class="flex items-center justify-between p-md bg-surface border-b border-outline-variant/30">
+        <h3 id="ask-modal-title" class="font-bold text-body-lg text-on-surface flex items-center gap-1">
+          <span>📝</span> 發佈課業新提問
+        </h3>
+        <button class="text-secondary hover:text-on-surface text-xl" onclick="closeAskModal()">&times;</button>
+      </div>
+      <div class="p-md space-y-md">
+        <div class="grid grid-cols-3 gap-md">
+          <div>
+            <label class="block text-xs font-bold text-secondary mb-1">發佈看板:</label>
+            <select id="ask-board" class="w-full bg-surface-container-low dark:bg-surface border border-outline-variant rounded-lg py-2 px-3 text-xs outline-none" onchange="syncAskTemplate(); handleAskBoardChange();">
+              <option value="cmee">⚙️ 機電學院</option>
+              <option value="ceecs">⚡ 電資學院</option>
+              <option value="coe">🏗️ 工程學院</option>
+              <option value="com">📈 管理學院</option>
+              <option value="cod">🎨 設計學院</option>
+              <option value="chss">🏛️ 人文與社會科學學院</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-secondary mb-1">發佈科系:</label>
+            <select id="ask-dept" class="w-full bg-surface-container-low dark:bg-surface border border-outline-variant rounded-lg py-2 px-3 text-xs outline-none">
+              <!-- Dynamically populated -->
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-secondary mb-1">懸賞金幣 (系統提供 / 我的金幣: <span id="ask-user-coins" class="text-yellow-600 dark:text-yellow-400 font-bold">0</span>):</label>
+            <input class="w-full bg-surface-container-low dark:bg-surface border border-outline-variant rounded-lg py-2 px-3 text-xs outline-none focus:ring-1 focus:ring-primary" id="ask-bounty" min="5" max="100" step="5" type="number" value="10"/>
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-secondary mb-1">提問標題:</label>
+          <input class="w-full bg-surface-container-low dark:bg-surface border border-outline-variant rounded-lg py-2 px-3 text-xs outline-none focus:ring-1 focus:ring-primary" id="ask-title" placeholder="例：請教常微分特解yp的假設係數..." type="text"/>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-secondary mb-1">標籤 (逗號分隔):</label>
+          <input class="w-full bg-surface-container-low dark:bg-surface border border-outline-variant rounded-lg py-2 px-3 text-xs outline-none focus:ring-1 focus:ring-primary" id="ask-tags" placeholder="例：微積分, 常微分方程, 大一必修..." type="text"/>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-secondary mb-1">問題詳細敘述:</label>
+          <textarea class="w-full bg-surface-container-low dark:bg-surface border border-outline-variant rounded-lg py-2 px-3 text-xs outline-none focus:ring-1 focus:ring-primary" id="ask-content" placeholder="請寫下詳細算式、程式碼或卡關點..." rows="4"></textarea>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-secondary mb-1.5">📎 模擬題目附圖相簿範本:</label>
+          <div class="grid grid-cols-4 gap-sm text-[11px] image-template-selector">
+            <button class="py-1.5 rounded-lg border border-primary text-primary bg-primary/5 font-semibold text-center" id="tpl-math" onclick="selectImageTemplate('math')">微積分</button>
+            <button class="py-1.5 rounded-lg border border-outline-variant/40 hover:border-primary text-secondary text-center" id="tpl-circuit" onclick="selectImageTemplate('circuit')">電路圖</button>
+            <button class="py-1.5 rounded-lg border border-outline-variant/40 hover:border-primary text-secondary text-center" id="tpl-options" onclick="selectImageTemplate('options')">期權</button>
+            <button class="py-1.5 rounded-lg border border-outline-variant/40 hover:border-primary text-secondary text-center" id="tpl-bst" onclick="selectImageTemplate('bst')">BST樹</button>
+          </div>
+          <input id="ask-image-tpl" type="hidden" value="math"/>
+        </div>
+        <div class="bg-surface-container-low dark:bg-surface rounded-xl border border-outline-variant/30 p-3 space-y-2">
+          <label class="block text-xs font-bold text-secondary">🖼️ 上傳圖片與筆刷標註:</label>
+          <div class="flex flex-wrap gap-sm items-center">
+            <input id="ask-upload-image" type="file" accept="image/*" class="text-[11px] text-secondary flex-1 min-w-[180px]" onchange="handleAskImageUpload(event)"/>
+            <button type="button" class="px-3 py-1.5 rounded-lg border border-outline-variant text-secondary text-[11px] font-semibold hover:bg-surface-container" onclick="openAskDoodleCanvas()">開啟筆刷畫布</button>
+            <button type="button" class="px-3 py-1.5 rounded-lg border border-red-300 text-red-600 text-[11px] font-semibold hover:bg-red-50" onclick="removeAskAttachment()">移除圖片</button>
+          </div>
+          <div id="ask-doodle-area" class="hidden mt-2 rounded-lg border border-outline-variant/40 overflow-hidden bg-white">
+            <canvas id="ask-doodle-canvas" width="520" height="300" class="w-full h-auto block cursor-crosshair bg-white"></canvas>
+            <div class="flex flex-wrap gap-sm p-2 bg-surface-container-low border-t border-outline-variant/30 text-[11px]">
+              <button type="button" id="ask-brush-pen" class="px-3 py-1 rounded border border-blue-500 text-blue-600 bg-blue-50 font-semibold" onclick="setAskDoodleTool('pen')">✏️ 筆刷</button>
+              <button type="button" id="ask-brush-eraser" class="px-3 py-1 rounded border border-outline-variant text-secondary font-semibold" onclick="setAskDoodleTool('eraser')">🧽 橡皮擦</button>
+              <button type="button" class="px-3 py-1 rounded border border-outline-variant text-secondary font-semibold" onclick="clearAskDoodleCanvas()">清除筆跡</button>
+              <span class="ml-auto text-secondary self-center">發佈時會自動附上目前畫面</span>
+            </div>
+          </div>
+        </div>
+        <div class="hidden text-xs font-bold text-error" id="ask-warning">⚠️ 請填寫完整內容，或金幣餘額不足！</div>
+      </div>
+      <div class="flex justify-end gap-sm p-md bg-surface-container-low border-t border-outline-variant/30">
+        <button class="px-4 py-2 border border-outline-variant text-secondary rounded-lg font-bold text-xs hover:bg-surface-container transition-all" onclick="closeAskModal()">取消</button>
+        <button id="ask-submit-btn" class="px-5 py-2 bg-primary text-on-primary rounded-lg font-bold text-xs hover:bg-surface-tint shadow transition-all" onclick="submitNewQuestion()">發佈 (+5 金幣)</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CANVAS PAINT MODAL (Hand-drawing annotation overlay) -->
+  <div class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-300" id="canvas-modal">
+    <div class="bg-surface-container-lowest dark:bg-surface-container-high rounded-2xl border border-outline-variant/30 shadow-xl max-w-lg w-full m-4 overflow-hidden transform scale-95 transition-transform duration-300">
+      <div class="flex items-center justify-between p-md bg-surface border-b border-outline-variant/30">
+        <h3 class="font-bold text-body-lg text-on-surface flex items-center gap-1">
+          <span>🖍️</span> 紅筆圈選標註題目附圖
+        </h3>
+        <button class="text-secondary hover:text-on-surface text-xl" onclick="closeCanvasModal()">&times;</button>
+      </div>
+      <div class="p-md flex flex-col items-center">
+        <p class="text-secondary text-[11px] mb-2.5 text-center">請直接用滑鼠/觸控在考題紙上拖曳畫紅線標註，按「儲存」後回覆解答將會自動附上此圖：</p>
+        
+        <div class="canvas-paint-wrapper border border-outline-variant/40 rounded-lg overflow-hidden shadow-md">
+          <canvas id="paint-canvas" width="500" height="350" class="w-full max-w-[500px] h-auto block"></canvas>
+        </div>
+        
+        <div class="flex gap-md justify-center mt-3 text-xs w-full">
+          <button class="px-4 py-1.5 border border-red-500 text-red-500 rounded bg-red-500/5 font-semibold" id="canvas-tool-pen" onclick="setCanvasTool('pen')">🔴 紅筆繪圖</button>
+          <button class="px-4 py-1.5 border border-outline-variant text-secondary rounded hover:bg-surface-container" id="canvas-tool-eraser" onclick="setCanvasTool('eraser')">🧽 橡皮擦</button>
+          <button class="px-4 py-1.5 border border-outline-variant text-secondary rounded hover:bg-surface-container" onclick="clearCanvasPaint()">🗑️ 清除重畫</button>
+        </div>
+      </div>
+      <div class="flex justify-end gap-sm p-md bg-surface-container-low border-t border-outline-variant/30">
+        <button class="px-4 py-2 border border-outline-variant text-secondary rounded-lg font-bold text-xs hover:bg-surface-container transition-all" onclick="closeCanvasModal()">取消</button>
+        <button class="px-5 py-2 bg-primary text-on-primary rounded-lg font-bold text-xs hover:bg-surface-tint shadow transition-all" onclick="saveCanvasAnnotation()">完成標註並儲存</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CREATE STUDY ROOM MODAL -->
+  <div class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-300" id="create-study-modal">
+    <div class="bg-surface-container-lowest dark:bg-surface-container-high rounded-2xl border border-outline-variant/30 shadow-xl max-w-sm w-full m-4 overflow-hidden transform scale-95 transition-transform duration-300">
+      <div class="flex items-center justify-between p-md bg-surface border-b border-outline-variant/30">
+        <h3 class="font-bold text-body-lg text-on-surface flex items-center gap-1">
+          <span>📡</span> 發起課業共讀邀約
+        </h3>
+        <button class="text-secondary hover:text-on-surface text-xl" onclick="closeCreateStudyModal()">&times;</button>
+      </div>
+      <div class="p-md space-y-md">
+        <div>
+          <label class="block text-xs font-bold text-secondary mb-1">共讀科目 / 專案主題:</label>
+          <input class="w-full bg-surface-container-low dark:bg-surface border border-outline-variant rounded-lg py-2 px-3 text-xs outline-none focus:ring-1 focus:ring-primary" id="study-subject" placeholder="例：微積分期末考集體衝刺..." type="text"/>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-secondary mb-1">約定時間 / 頻率:</label>
+          <input class="w-full bg-surface-container-low dark:bg-surface border border-outline-variant rounded-lg py-2 px-3 text-xs outline-none focus:ring-1 focus:ring-primary" id="study-time" placeholder="例：今天 18:30 - 21:30..." type="text"/>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-secondary mb-1">進行地點 / 連接方式:</label>
+          <input class="w-full bg-surface-container-low dark:bg-surface border border-outline-variant rounded-lg py-2 px-3 text-xs outline-none focus:ring-1 focus:ring-primary" id="study-method" placeholder="例：紅樓2F討論室 / Discord語音..." type="text"/>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-secondary mb-1">小組席次限制 (人數):</label>
+          <input class="w-full bg-surface-container-low dark:bg-surface border border-outline-variant rounded-lg py-2 px-3 text-xs outline-none focus:ring-1 focus:ring-primary" id="study-limit" min="2" max="12" type="number" value="4"/>
+        </div>
+        <div class="hidden text-xs font-bold text-error" id="study-warning">⚠️ 請填寫科目、約定時間與進行地點！</div>
+      </div>
+      <div class="flex justify-end gap-sm p-md bg-surface-container-low border-t border-outline-variant/30">
+        <button class="px-4 py-2 border border-outline-variant text-secondary rounded-lg font-bold text-xs hover:bg-surface-container transition-all" onclick="closeCreateStudyModal()">取消</button>
+        <button class="px-5 py-2 bg-primary text-on-primary rounded-lg font-bold text-xs hover:bg-surface-tint shadow transition-all" onclick="submitStudyInvitation()">發起邀約 (+10 EXP)</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- WELFARE COUPON REDEEMED CODE DISPLAY MODAL -->
+  <div class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-300" id="coupon-modal">
+    <div class="bg-surface-container-lowest dark:bg-surface-container-high rounded-2xl border border-outline-variant/30 shadow-xl max-w-xs w-full m-4 overflow-hidden p-lg transform scale-95 transition-transform duration-300 text-center">
+      <span class="text-4xl block mb-2">🎉</span>
+      <h3 class="font-bold text-body-lg text-on-surface mb-1" id="coupon-modal-title">兌換成功</h3>
+      <p class="text-xs text-secondary mb-lg" id="coupon-modal-desc">請至校園指定特約商店，向店員出示以下條碼代碼兌換：</p>
+      
+      <!-- Mock Barcode style code container -->
+      <div class="bg-gray-100 dark:bg-gray-800 p-md rounded-lg border border-outline-variant/20 mb-lg">
+        <span class="block font-bold text-base tracking-widest text-primary dark:text-primary-fixed-dim select-all" id="coupon-code-display">CODE-XXXX-XXXX</span>
+        <span class="block text-[8px] text-secondary mt-1">模擬條碼 (雙擊可複製文字)</span>
+      </div>
+      
+      <button class="w-full bg-primary text-on-primary hover:bg-surface-tint font-bold py-2 rounded-lg text-xs transition-all shadow-sm" onclick="closeCouponModal()">
+        確認並關閉
+      </button>
+    </div>
+  </div>
+
+  <!-- Profile Settings Dialog (Simulation Fallback modal) -->
+  <div class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-300" id="profile-modal">
+    <div class="bg-surface-container-lowest dark:bg-surface-container-high rounded-2xl border border-outline-variant/30 shadow-xl max-w-sm w-full m-4 overflow-hidden transform scale-95 transition-transform duration-300">
+      <div class="flex items-center justify-between p-md bg-surface border-b border-outline-variant/30">
+        <h3 class="font-bold text-body-lg text-on-surface flex items-center gap-1">
+          <span>👤</span> 會員資料與角色設定
+        </h3>
+        <button class="text-secondary hover:text-on-surface text-xl" onclick="closeProfileModal()">&times;</button>
+      </div>
+      <div class="p-md space-y-md">
+        <p class="text-xs text-secondary">請直接使用上方導覽列的「個人檔案」分頁，可在那裡編輯您的暱稱、切換學系以及選擇寵物角色！</p>
+      </div>
+      <div class="flex justify-end p-md bg-surface-container-low border-t border-outline-variant/30">
+        <button class="px-5 py-2 bg-primary text-on-primary rounded-lg font-bold text-xs hover:bg-surface-tint shadow transition-all" onclick="closeProfileModal()">確定</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Core presentation script dependencies -->
+  <script src="data/userData.js"></script>
+  <script src="data/boardsData.js"></script>
+  <script src="script.js"></script>
+
+</body>
+</html>
+

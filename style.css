@@ -1,0 +1,398 @@
+/* ==========================================================================
+   北科遊戲化學業交流區 - 核心微互動與自訂動畫系統 (Slate & Sand)
+   ========================================================================== */
+
+/* 全局自訂變數 (補充 Tailwind 缺少的 CSS 變數) */
+:root {
+  --color-ee: #00d2ff;     /* 電機藍 */
+  --color-im: #bf55ec;     /* 資財紫 */
+  --color-cs: #2ecc71;     /* 資工綠 */
+  --color-me: #e67e22;     /* 機械橘 */
+  --color-gold: #f59e0b;   /* 黃金金 */
+  --theme-accent: #4b6172; /* 預設 Slate 藍 */
+  
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+}
+
+/* 捲軸美化與隱藏 */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* 樹狀留言回覆虛線連線 */
+.comment-children-container {
+  margin-left: 28px;
+  border-left: 2px dashed rgba(75, 97, 114, 0.25); /* 使用 primary 顏色透明度 */
+  padding-left: 14px;
+  margin-top: 8px;
+}
+.dark .comment-children-container {
+  border-left-color: rgba(255, 255, 255, 0.1);
+}
+
+/* ==========================================================================
+   動畫系統 (Masots, Coins, Text, Bubbles)
+   ========================================================================== */
+
+/* Mascot 浮動呼吸 */
+.anim-float {
+  animation: float-bot 4s ease-in-out infinite;
+  transform-origin: center;
+}
+@keyframes float-bot {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0px); }
+}
+
+/* Mascot LED 呼吸燈 */
+.anim-pulse {
+  animation: pulse-led 2s ease-in-out infinite;
+}
+@keyframes pulse-led {
+  0% { opacity: 0.4; r: 5px; }
+  50% { opacity: 1; r: 7px; }
+  100% { opacity: 0.4; r: 5px; }
+}
+
+/* 旋轉動畫 */
+.anim-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+@keyframes spin-slow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 對話泡泡彈出 */
+.pet-speech {
+  animation: speech-fade 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+@keyframes speech-fade {
+  0% { opacity: 0; transform: translateY(8px) scale(0.9); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* 噴出金幣飛行特效 */
+@keyframes float-coin {
+  0% { transform: translate(0, 0) scale(1); opacity: 1; }
+  30% { transform: translate(var(--dx), calc(var(--dy) - 50px)) scale(1.4); opacity: 1; }
+  100% { transform: translate(var(--tx), var(--ty)) scale(0.6); opacity: 0; }
+}
+.coin-particle {
+  position: fixed;
+  font-size: 1.5rem;
+  z-index: 9999;
+  pointer-events: none;
+  animation: float-coin 1s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+}
+
+/* 懸浮數值上升淡出 */
+.floating-text {
+  position: fixed;
+  font-weight: 800;
+  font-size: 1.1rem;
+  z-index: 9999;
+  pointer-events: none;
+  animation: float-up-fade 1.2s ease-out forwards;
+}
+@keyframes float-up-fade {
+  0% { transform: translateY(0px); opacity: 1; }
+  100% { transform: translateY(-40px); opacity: 0; }
+}
+
+/* 頁面載入漸變動畫 */
+.animate-fade-in {
+  animation: fade-in 0.35s ease-out forwards;
+}
+@keyframes fade-in {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes fade-in-up {
+  0% { opacity: 0; transform: translateY(12px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   功能組件自訂樣式 (Canvas, Visualizer, Radar, Tour)
+   ========================================================================== */
+
+/* 紅筆手繪標註畫布 */
+.canvas-paint-wrapper {
+  position: relative;
+  background: #1e293b;
+  border-radius: 8px;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+#paint-canvas {
+  cursor: crosshair;
+  display: block;
+}
+
+/* 畫筆/橡皮擦狀態按鈕 */
+.canvas-controls button.active {
+  background-color: #ef4444;
+  color: white;
+  border-color: #ef4444;
+}
+
+/* 資料結構 SVG 樹狀留言圖 */
+.tree-svg-container {
+  width: 100%;
+  height: 380px;
+  background: #111b27;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+.svg-link-line {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.1);
+  stroke-width: 2.5;
+  transition: stroke 0.3s, stroke-width 0.3s;
+}
+.svg-link-line.highlighted {
+  stroke: var(--theme-accent) !important;
+  stroke-width: 4;
+}
+.svg-node-circle {
+  transition: transform 0.2s, fill 0.3s, stroke 0.3s;
+  cursor: pointer;
+}
+.svg-node-circle:hover {
+  transform: scale(1.25);
+}
+.svg-node-circle.highlighted {
+  stroke: #fff !important;
+  stroke-width: 3px !important;
+  filter: drop-shadow(0 0 8px var(--theme-accent));
+}
+.svg-node-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  fill: #94a3b8;
+  pointer-events: none;
+  text-anchor: middle;
+}
+
+/* 樹狀圖圖例圓圈顏色 */
+.node-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+.dot-root { background-color: #3b82f6; box-shadow: 0 0 6px #3b82f6; }
+.dot-l1 { background-color: #f59e0b; box-shadow: 0 0 6px #f59e0b; }
+.dot-l2 { background-color: #10b981; box-shadow: 0 0 6px #10b981; }
+.dot-adopted { background-color: #a855f7; box-shadow: 0 0 8px #a855f7; }
+.dot-ta-verified { background-color: #ec4899; box-shadow: 0 0 8px #ec4899; }
+
+/* 簡報導覽高亮圈 */
+.tour-highlight {
+  box-shadow: 0 0 0 4px #ef4444, 0 0 20px #ef4444 !important;
+  animation: tour-blink 1.5s ease-in-out infinite alternate !important;
+  z-index: 1000 !important;
+}
+@keyframes tour-blink {
+  0% { box-shadow: 0 0 0 2px #ef4444, 0 0 8px #ef4444; }
+  100% { box-shadow: 0 0 0 6px #ef4444, 0 0 24px #ef4444; }
+}
+.tour-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(2px);
+  z-index: 999;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+/* 簽到與金幣飛入起點/終點定位輔助 */
+#pet-coins-container {
+  position: relative;
+}
+
+/* 側邊欄豪華自定義裝備特效 */
+.luxury-room-equipped {
+  position: relative;
+  background: linear-gradient(135deg, #f5f3f4 0%, #e1bb98 100%) !important;
+  border-color: #76593c !important;
+  box-shadow: 0 0 16px rgba(118, 89, 60, 0.2) !important;
+}
+.dark .luxury-room-equipped {
+  background: linear-gradient(135deg, #1e293b 0%, #2b1702 100%) !important;
+  border-color: var(--color-gold) !important;
+  box-shadow: 0 0 24px rgba(245, 158, 11, 0.35) !important;
+}
+
+/* 已採納 / 助教認證留言發光 */
+.comment-node-self.adopted {
+  border-left: 4px solid #a855f7 !important;
+  background: rgba(168, 85, 247, 0.05) !important;
+}
+.comment-node-self.ta-verified {
+  border-left: 4px solid #ec4899 !important;
+  background: rgba(236, 72, 153, 0.05) !important;
+}
+
+/* 雷達呼吸波 */
+.radar-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(75, 97, 114, 0.3);
+  border-radius: 50%;
+  animation: radar-pulse 3s linear infinite;
+  pointer-events: none;
+}
+.radar-circle.circle-1 { width: 100px; height: 100px; animation-delay: 0s; }
+.radar-circle.circle-2 { width: 200px; height: 200px; animation-delay: 1s; }
+.radar-circle.circle-3 { width: 300px; height: 300px; animation-delay: 2s; }
+
+@keyframes radar-pulse {
+  0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.8; }
+  100% { transform: translate(-50%, -50%) scale(1.2); opacity: 0; }
+}
+
+.radar-sweep {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 150px;
+  height: 150px;
+  background: conic-gradient(from 0deg, rgba(75, 97, 114, 0.15) 0%, transparent 50%);
+  transform-origin: top left;
+  animation: radar-sweep-anim 4s linear infinite;
+  pointer-events: none;
+}
+@keyframes radar-sweep-anim {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.radar-scanner-container {
+  position: relative;
+  width: 100%;
+  height: 320px;
+  background: #f0f2f5;
+  border: 1px solid #c3c7cc;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.dark .radar-scanner-container {
+  background: #090e18;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.radar-pin {
+  position: absolute;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  transition: transform 0.2s;
+  animation: pop-up 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+.radar-pin:hover {
+  transform: translate(-50%, -50%) scale(1.2);
+}
+
+
+/* 可滾動側邊分頁：避免寵物狀態卡或分頁太多時超出螢幕 */
+aside.fixed {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+}
+aside.fixed > nav,
+aside .side-nav-scrollable {
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 2px;
+}
+aside.fixed::-webkit-scrollbar,
+aside.fixed > nav::-webkit-scrollbar {
+  width: 6px;
+}
+aside.fixed::-webkit-scrollbar-thumb,
+aside.fixed > nav::-webkit-scrollbar-thumb {
+  background: rgba(115, 119, 124, 0.35);
+  border-radius: 999px;
+}
+
+/* 提問紀錄：讓多筆資料可在卡片內捲動 */
+#profile-question-history-list {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(75, 97, 114, 0.35) transparent;
+}
+#profile-question-history-list::-webkit-scrollbar {
+  width: 8px;
+}
+#profile-question-history-list::-webkit-scrollbar-thumb {
+  background: rgba(75, 97, 114, 0.35);
+  border-radius: 9999px;
+}
+
+/* 系統管理員模式下，避免「3分鐘簡報導覽」按鈕被擠成直排 */
+#guide-tour-btn {
+  min-width: 132px;
+  white-space: nowrap;
+  flex: 0 0 auto;
+  line-height: 1.2;
+}
+#guide-tour-btn .guide-short-text {
+  display: none;
+}
+body.admin-role #guide-tour-btn {
+  min-width: 96px;
+  padding-left: 12px;
+  padding-right: 12px;
+  font-size: 12px;
+}
+body.admin-role #guide-tour-btn .guide-full-text {
+  display: none;
+}
+body.admin-role #guide-tour-btn .guide-short-text {
+  display: inline;
+}
+body.admin-role #guide-tour-btn .material-symbols-outlined {
+  font-size: 15px;
+}
+
+
+/* 互動式簡報導覽卡片 */
+.tour-card {
+  position: fixed;
+  right: 28px;
+  bottom: 28px;
+  width: min(420px, calc(100vw - 32px));
+  z-index: 1002;
+  pointer-events: auto;
+  background: var(--tour-card-bg, #ffffff);
+  color: #1b1c1d;
+  border: 1px solid rgba(195, 199, 204, 0.85);
+  border-radius: 18px;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
+  padding: 18px;
+}
+.dark .tour-card {
+  --tour-card-bg: #1f2933;
+  color: #f2f0f1;
+  border-color: rgba(255, 255, 255, 0.16);
+}
+.admin-panel-tab {
+  white-space: nowrap;
+}
